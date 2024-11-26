@@ -99,6 +99,9 @@ class Users extends Controller
 */
   public function settings($params)
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     $core = $this->userModel->getCore(1);
     $data = [
       'params' => $params,
@@ -119,6 +122,9 @@ class Users extends Controller
 
   public function uploads($params)
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     $core = $this->userModel->getCore(1);
     $data = [
       'params' => $params,
@@ -136,6 +142,9 @@ class Users extends Controller
 
   public function articles($params)
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     $core = $this->userModel->getCore(1);
     $articles = $this->userModel->getArticles2();
     $article = $this->userModel->getArticleById($_GET['id']);
@@ -156,6 +165,9 @@ class Users extends Controller
 
   public function verses($params)
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     $core = $this->userModel->getCore(1);
     $verses = $this->userModel->getVerses();
     $verse = $this->userModel->getVerseById($_GET['id']);
@@ -295,6 +307,9 @@ class Users extends Controller
 
   public function articleUpload()
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     // Check if POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if (!empty($_FILES['thumbnail']['name'])) {
