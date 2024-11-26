@@ -1,13 +1,13 @@
 <?php
 // DB Params
 define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "revival");
+define("DB_USER", "revivallabourers");
+define("DB_PASS", "revivallabourers");
+define("DB_NAME", "stanvicc_revival");
 
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'http://localhost/revival');
+define('URLROOT', 'https://sample.stanvic.com.ng');
 // Site Name
 define('SITENAME', 'Revival Labourers');
