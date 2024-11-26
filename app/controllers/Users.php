@@ -9,11 +9,25 @@ class Users extends Controller
 
   public function index()
   {
-    redirect('users/login');
+    if (isset($_SESSION['user_id'])) {
+      redirect('users/settings/core');
+    }
+    $data = [
+      'username' => '',
+      'password' => '',
+      'username_err' => '',
+      'password_err' => '',
+    ];
+
+    // Load View
+    $this->view('users/login', $data);
   }
 
   public function login()
   {
+    if (isset($_SESSION['user_id'])) {
+      redirect('users/settings/core');
+    }
     // Init data
     $data = [
       'username' => '',
@@ -74,9 +88,9 @@ class Users extends Controller
     $_SESSION['user_id'] = $user->id;
     $_SESSION['user_name'] = $user->name;
     flash('msg', 'WELCOME ADMIN!');
-    redirect('users/settings');
+    redirect('users/settings/core');
   }
-/*
+  /*
 
   // Views UI Prior to Form Submission //
 
@@ -103,10 +117,11 @@ class Users extends Controller
     $this->view('users/settings', $data);
   }
 
-  public function uploads()
+  public function uploads($params)
   {
     $core = $this->userModel->getCore(1);
     $data = [
+      'params' => $params,
       'link' => '',
       'title' => '',
       'preacher' => '',
@@ -119,15 +134,20 @@ class Users extends Controller
     $this->view('users/uploads', $data);
   }
 
-   public function articles()
+  public function articles($params)
   {
     $core = $this->userModel->getCore(1);
+    $articles = $this->userModel->getArticles2();
+    $article = $this->userModel->getArticleById($_GET['id']);
     $data = [
+      'params' => $params,
       'author' => '',
       'title' => '',
       'content' => '',
       'thumbnail' => '',
-      'core' => $core
+      'core' => $core,
+      'articles' => $articles,
+      'article' => $article,
     ];
 
     // Load View
@@ -174,15 +194,15 @@ class Users extends Controller
       $data['WWA'] = nl2br($data['WWA']);
       $data['WWB'] = nl2br($data['WWB']);
       if (empty($data['h1']) || empty($data['h1b']) || empty($data['para']) || empty($data['WWA']) ||  empty($data['WWB'])) {
-      die('Something went wrong!');
+        die('Something went wrong!');
       }
       if ($this->userModel->updateCore($data)) {
         flash('msg', 'Changes saved successfully!');
         redirect('users/settings/core');
-      }else{
+      } else {
         die('Something went wrong!');
       }
-    }else{ // Not Post Request
+    } else { // Not Post Request
       // Redirect to settings page
       redirect('users/settings/core');
     }
@@ -198,17 +218,20 @@ class Users extends Controller
         'address' => val_entry($_POST['address']),
         'phone1' => val_entry($_POST['phone1']),
         'phone2' => val_entry($_POST['phone2']),
+        'WAG' => val_entry($_POST['WAG']),
+        'website' => val_entry($_POST['website']),
+        'email' => val_entry($_POST['email']),
       ];
       if (empty($data['address']) || empty($data['phone1']) || empty($data['phone2'])) {
-      die('Something went wrong!');
+        die('Something went wrong!');
       }
       if ($this->userModel->updateMore($data)) {
         flash('msg', 'Changes saved successfully!');
         redirect('users/settings/more');
-      }else{
+      } else {
         die('Something went wrong!');
       }
-    }else{ // Not Post Request
+    } else { // Not Post Request
       // Redirect to settings page
       redirect('users/settings/more');
     }
@@ -221,7 +244,7 @@ class Users extends Controller
       // Image Processing 
       $target_dir = "videos/";
       $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
       $data = [
         'link' => val_entry($_POST['link']),
@@ -231,7 +254,7 @@ class Users extends Controller
         'thumbnail' => $target_file,
       ];
       if (empty($data['link']) || empty($data['title']) || empty($data['preacher']) || empty($data['details'])) {
-      $data['error'] = 'All fields are required!';
+        $data['error'] = 'All fields are required!';
         $this->view('users/uploads', $data);
       }
 
@@ -244,27 +267,29 @@ class Users extends Controller
       // Check file size
       if ($_FILES["thumbnail"]["size"] > 500000) {
         $data['error'] = 'Image file is too large!';
-       $this->view('users/uploads', $data);
+        $this->view('users/uploads', $data);
       }
 
       // Allow certain file formats
-      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-      && $imageFileType != "gif" ) {
+      if (
+        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif"
+      ) {
         $data['error'] = 'File format not supported!';
         $this->view('users/uploads', $data);
       }
       if (empty($data['error'])) {
         move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-       if ($this->userModel->insertIntoUploads($data)) {
-        flash('msg', 'Sermon is uploaded successfully!');
-        redirect('users/uploads');
-      }else{
-        die('Something went wrong!');
+        if ($this->userModel->insertIntoUploads($data)) {
+          flash('msg', 'Sermon is uploaded successfully!');
+          redirect('users/uploads/add');
+        } else {
+          die('Something went wrong!');
+        }
       }
-      }
-    }else{ // Not Post Request
+    } else { // Not Post Request
       // Redirect to uploads page
-      redirect('users/uploads');
+      redirect('users/uploads/add');
     }
   }
 
@@ -274,51 +299,52 @@ class Users extends Controller
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if (!empty($_FILES['thumbnail']['name'])) {
         // Image Processing 
-      $target_dir = "articles/";
-      $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $target_dir = "articles/";
+        $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-      $data = [
-        'author' => val_entry($_POST['author']),
-        'title' => val_entry($_POST['title']),
-        'content' => val_entry($_POST['content']),
-        'thumbnail' => $target_file,
-      ];
-      if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
-      $data['error'] = 'All fields are required!';
-        $this->view('users/articles', $data);
-      }
+        $data = [
+          'author' => val_entry($_POST['author']),
+          'title' => val_entry($_POST['title']),
+          'content' => val_entry($_POST['content']),
+          'thumbnail' => $target_file,
+        ];
+        if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
+          $data['error'] = 'All fields are required!';
+          $this->view('users/articles', $data);
+        }
 
-      // Check if file already exists
-      if (file_exists($target_file)) {
-        $data['error'] = 'Image file already exist!';
-        $this->view('users/articles', $data);
-      }
+        // Check if file already exists
+        if (file_exists($target_file)) {
+          $data['error'] = 'Image file already exist!';
+          $this->view('users/articles', $data);
+        }
 
-      // Check file size
-      if ($_FILES["thumbnail"]["size"] > 500000) {
-        $data['error'] = 'Image file is too large!';
-       $this->view('users/articles', $data);
-      }
+        // Check file size
+        if ($_FILES["thumbnail"]["size"] > 500000) {
+          $data['error'] = 'Image file is too large!';
+          $this->view('users/articles', $data);
+        }
 
-      // Allow certain file formats
-      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-      && $imageFileType != "gif" ) {
-        $data['error'] = 'File format not supported!';
-        $this->view('users/articles', $data);
-      }
-      if (empty($data['error'])) {
-        move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-        $data['content'] = nl2br($data['content']);
-       if ($this->userModel->insertIntoArticles($data)) {
-        flash('msg', 'Article is saved successfully!');
-        redirect('users/articles');
-      }else{
-        die('Something went wrong!');
-      }
-      }
-      }
-      else{ // Thumbnail Image is empty
+        // Allow certain file formats
+        if (
+          $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+          && $imageFileType != "gif"
+        ) {
+          $data['error'] = 'File format not supported!';
+          $this->view('users/articles', $data);
+        }
+        if (empty($data['error'])) {
+          move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
+          $data['content'] = nl2br($data['content']);
+          if ($this->userModel->insertIntoArticles($data)) {
+            flash('msg', 'Article is saved successfully!');
+            redirect('users/articles/add');
+          } else {
+            die('Something went wrong!');
+          }
+        }
+      } else { // Thumbnail Image is empty
         $data = [
           'author' => val_entry($_POST['author']),
           'title' => val_entry($_POST['title']),
@@ -326,21 +352,42 @@ class Users extends Controller
           'thumbnail' => '',
         ];
         if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
-        $data['error'] = 'All fields are required!';
+          $data['error'] = 'All fields are required!';
           $this->view('users/articles', $data);
-        }else{
+        } else {
           $data['content'] = nl2br($data['content']);
           if ($this->userModel->insertIntoArticles($data)) {
             flash('msg', 'Article is saved successfully!');
-            redirect('users/articles');
-          }else{
+            redirect('users/articles/add');
+          } else {
             die('Something went wrong!');
           }
         }
       }
-    }else{ // Not Post Request
+    } else { // Not Post Request
       // Redirect to uploads page
-      redirect('users/articles');
+      redirect('users/articles/add');
+    }
+  }
+
+
+  public function articleEdit($id)
+  {
+    // Check if POST
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $data = [
+        'id' => $id,
+        'author' => val_entry($_POST['author']),
+        'title' => val_entry($_POST['title']),
+        'content' => val_entry($_POST['content']),
+        'thumbnail' => '',
+      ];
+      if ($this->userModel->editArticle($data)) {
+        flash('msg', 'Article is saved successfully!');
+        redirect('users/articles/edit?id=' . $id);
+      } else {
+        die('Something went wrong!');
+      }
     }
   }
 
@@ -357,12 +404,12 @@ class Users extends Controller
       if (empty($data['content']) ||  empty($data['verse'])) {
         $data['error'] = 'All fields are required!';
         $this->view('users/verses', $data);
-      }else{
+      } else {
         $this->userModel->updateVerses($data);
         flash('msg', 'Verse is saved successfully!');
-        redirect('users/verses/edit?id='.$id);
+        redirect('users/verses/edit?id=' . $id);
       }
-    }else{ // Not Post Request
+    } else { // Not Post Request
       // Redirect to settings page
       redirect('users/verses/view');
     }

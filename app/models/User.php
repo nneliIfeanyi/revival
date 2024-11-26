@@ -14,7 +14,7 @@ class User
 
 */
 
- 
+
   public function insertIntoUploads($data)
   {
     // Prepare Query
@@ -56,6 +56,27 @@ class User
     }
   }
 
+  public function insertIntoEvents($data)
+  {
+    // Prepare Query
+    $this->db->query('INSERT INTO events (name, theme, details, startDate, endDate) 
+      VALUES (:name, :theme, :details, :startDate, :endDate)');
+
+    // Bind Values
+    $this->db->bind(':name', $data['name']);
+    $this->db->bind(':theme', $data['theme']);
+    $this->db->bind(':details', $data['details']);
+    $this->db->bind(':startDate', $data['startDate']);
+    $this->db->bind(':endDate', $data['endDate']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function insertIntoVerses($data)
   {
     // Prepare Query
@@ -73,7 +94,7 @@ class User
     }
   }
 
-  
+
   /*
 
   PULLING | FETCHING FROM DB AS RESULT-SET
@@ -114,6 +135,31 @@ class User
     return $rows;
   }
 
+  public function getEvents1()
+  {
+    $this->db->query("SELECT * FROM events WHERE status = :status ORDER BY id DESC;");
+    $this->db->bind(':status', '1');
+    $rows = $this->db->resultset();
+
+    return $rows;
+  }
+
+  public function getEvents2()
+  {
+    $this->db->query("SELECT * FROM events WHERE status = :status ORDER BY id DESC;");
+    $this->db->bind(':status', '0');
+    $rows = $this->db->resultset();
+
+    return $rows;
+  }
+  public function getEvents()
+  {
+    $this->db->query("SELECT * FROM events ORDER BY id DESC;");
+    //$this->db->bind(':status', '0');
+    $rows = $this->db->resultset();
+
+    return $rows;
+  }
   public function getArticles2()
   {
     $this->db->query("SELECT * FROM articles ORDER BY id DESC;");
@@ -182,6 +228,25 @@ class User
     return $row;
   }
 
+  public function getEventById($id)
+  {
+    $this->db->query("SELECT * FROM events WHERE id = :id");
+    $this->db->bind(':id', $id);
+
+    $row = $this->db->single();
+
+    return $row;
+  }
+
+  public function getArticleById($id)
+  {
+    $this->db->query("SELECT * FROM articles WHERE id = :id");
+    $this->db->bind(':id', $id);
+
+    $row = $this->db->single();
+
+    return $row;
+  }
   // Find User By ID
   public function getVerseById($id)
   {
@@ -202,79 +267,125 @@ class User
     ///////////////////////////////
 */
 
-  public function updateCore($data){
-      // Prepare Query
-      $this->db->query('UPDATE core SET h1 = :h1, h1b = :h1b, para = :para, WWA = :WWA, WWB = :WWB WHERE id = :id');
+  public function updateCore($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE core SET h1 = :h1, h1b = :h1b, para = :para, WWA = :WWA, WWB = :WWB WHERE id = :id');
 
-      // Bind Values
-      $this->db->bind(':id', $data['id']);
-      $this->db->bind(':h1', $data['h1']);
-      $this->db->bind(':h1b', $data['h1b']);
-      $this->db->bind(':para', $data['para']);
-      $this->db->bind(':WWA', $data['WWA']);
-      $this->db->bind(':WWB', $data['WWB']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':h1', $data['h1']);
+    $this->db->bind(':h1b', $data['h1b']);
+    $this->db->bind(':para', $data['para']);
+    $this->db->bind(':WWA', $data['WWA']);
+    $this->db->bind(':WWB', $data['WWB']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    public function updateMore($data){
-      // Prepare Query
-      $this->db->query('UPDATE core SET address = :address, phone1 = :phone1, phone2 = :phone2 WHERE id = :id');
+  public function updateMore($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE core SET address = :address, phone1 = :phone1, phone2 = :phone2, email = :email, website = :website, WAG = :WAG WHERE id = :id');
 
-      // Bind Values
-      $this->db->bind(':id', $data['id']);
-      $this->db->bind(':address', $data['address']);
-      $this->db->bind(':phone1', $data['phone1']);
-      $this->db->bind(':phone2', $data['phone2']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':address', $data['address']);
+    $this->db->bind(':phone1', $data['phone1']);
+    $this->db->bind(':phone2', $data['phone2']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':website', $data['website']);
+    $this->db->bind(':WAG', $data['WAG']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
+  public function editArticle($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE articles SET author = :author, title = :title, content = :content WHERE id = :id');
 
-    public function updateUploads($data){
-      // Prepare Query
-      $this->db->query('UPDATE uploads SET link = :link, title = :title, preacher = :preacher, details = :details, thumbnail = :thumbnail WHERE id = :id');
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':author', $data['author']);
+    $this->db->bind(':title', $data['title']);
+    $this->db->bind(':content', $data['content']);
 
-      // Bind Values
-      $this->db->bind(':id', $data['id']);
-      $this->db->bind(':link', $data['link']);
-      $this->db->bind(':title', $data['title']);
-      $this->db->bind(':preacher', $data['preacher']);
-      $this->db->bind(':details', $data['details']);
-      $this->db->bind(':thumbnail', $data['thumbnail']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    public function updateVerses($data){
-      // Prepare Query
-      $this->db->query('UPDATE verses SET content = :content, verse = :verse WHERE id = :id');
+  public function updateUploads($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE uploads SET link = :link, title = :title, preacher = :preacher, details = :details, thumbnail = :thumbnail WHERE id = :id');
 
-      // Bind Values
-      $this->db->bind(':id', $data['id']);
-      $this->db->bind(':content', $data['content']);
-      $this->db->bind(':verse', $data['verse']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':link', $data['link']);
+    $this->db->bind(':title', $data['title']);
+    $this->db->bind(':preacher', $data['preacher']);
+    $this->db->bind(':details', $data['details']);
+    $this->db->bind(':thumbnail', $data['thumbnail']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
     }
+  }
+
+  public function updateEvent($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE events SET name = :name, theme = :theme, startDate = :startDate, details = :details, endDate = :endDate WHERE id = :id');
+
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':name', $data['name']);
+    $this->db->bind(':theme', $data['theme']);
+    $this->db->bind(':startDate', $data['startDate']);
+    $this->db->bind(':details', $data['details']);
+    $this->db->bind(':endDate', $data['endDate']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updateVerses($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE verses SET content = :content, verse = :verse WHERE id = :id');
+
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':content', $data['content']);
+    $this->db->bind(':verse', $data['verse']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
