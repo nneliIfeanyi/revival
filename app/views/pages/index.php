@@ -148,7 +148,6 @@
               <span class="date"><?= $event->startDate; ?> </span>
               <h3><?= $event->name; ?> | <?= $event->theme; ?></h3>
               <p><?= $event->details; ?></p>
-              <a href="#">Read More <i class="icon-arrow-right3"></i></a>
             </div>
           </div>
         <?php endforeach; ?>
