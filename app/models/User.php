@@ -228,6 +228,16 @@ class User
     return $row;
   }
 
+  public function getUploadById($id)
+  {
+    $this->db->query("SELECT * FROM uploads WHERE id = :id");
+    $this->db->bind(':id', $id);
+
+    $row = $this->db->single();
+
+    return $row;
+  }
+
   public function getEventById($id)
   {
     $this->db->query("SELECT * FROM events WHERE id = :id");
@@ -310,6 +320,26 @@ class User
     }
   }
 
+  public function editUpload($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE uploads SET link = :link, title = :title, preacher = :preacher, details = :details WHERE id = :id');
+
+    // Bind Values
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':link', $data['link']);
+    $this->db->bind(':title', $data['title']);
+    $this->db->bind(':preacher', $data['preacher']);
+    $this->db->bind(':details', $data['details']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function editArticle($data)
   {
     // Prepare Query
@@ -380,6 +410,22 @@ class User
     $this->db->bind(':id', $data['id']);
     $this->db->bind(':content', $data['content']);
     $this->db->bind(':verse', $data['verse']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function deleteUpload($id)
+  {
+    // Prepare Query
+    $this->db->query('DELETE FROM uploads WHERE id = :id');
+
+    // Bind Values
+    $this->db->bind(':id', $id);
 
     //Execute
     if ($this->db->execute()) {

@@ -9,18 +9,7 @@ class Users extends Controller
 
   public function index()
   {
-    if (isset($_SESSION['user_id'])) {
-      redirect('users/settings/core');
-    }
-    $data = [
-      'username' => '',
-      'password' => '',
-      'username_err' => '',
-      'password_err' => '',
-    ];
-
-    // Load View
-    $this->view('users/login', $data);
+    redirect('users/login');
   }
 
   public function login()
@@ -28,12 +17,13 @@ class Users extends Controller
     if (isset($_SESSION['user_id'])) {
       redirect('users/settings/core');
     }
-    // Init data
+    $core = $this->userModel->getCore(1);
     $data = [
       'username' => '',
       'password' => '',
       'username_err' => '',
       'password_err' => '',
+      'core' => $core
     ];
 
     // Load View
@@ -126,6 +116,8 @@ class Users extends Controller
       redirect('users/login');
     }
     $core = $this->userModel->getCore(1);
+    $uploads = $this->userModel->getUploads2();
+    $upload = $this->userModel->getUploadById($_GET['id']);
     $data = [
       'params' => $params,
       'link' => '',
@@ -133,6 +125,8 @@ class Users extends Controller
       'preacher' => '',
       'details' => '',
       'thumbnail' => '',
+      'uploads' => $uploads,
+      'upload' => $upload,
       'core' => $core
     ];
 
@@ -382,6 +376,27 @@ class Users extends Controller
     } else { // Not Post Request
       // Redirect to uploads page
       redirect('users/articles/add');
+    }
+  }
+
+  public function uploadEdit($id)
+  {
+    // Check if POST
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $data = [
+        'id' => $id,
+        'link' => val_entry($_POST['link']),
+        'title' => val_entry($_POST['title']),
+        'preacher' => val_entry($_POST['preacher']),
+        'details' => val_entry($_POST['details']),
+        'thumbnail' => '',
+      ];
+      if ($this->userModel->editUpload($data)) {
+        flash('msg', 'Changes saved successfully!');
+        redirect('users/uploads/edit?id=' . $id);
+      } else {
+        die('Something went wrong!');
+      }
     }
   }
 

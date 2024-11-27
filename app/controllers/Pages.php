@@ -74,6 +74,9 @@ class Pages extends Controller
 
   public function events($params)
   {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
     $core = $this->userModel->getCore(1);
     $events = $this->userModel->getEvents();
     $event = $this->userModel->getEventById($_GET['id']);
@@ -137,6 +140,26 @@ class Pages extends Controller
       }
     } else {
       redirect('pages/events/publish');
+    }
+  }
+
+  // Delete Post
+  public function delete($id)
+  {
+    if ($this->userModel->deleteUpload($id)) {
+      unlink($_GET['thumbnail']);
+      flash('msg', 'Video Removed', 'alert alert-danger');
+      redirect('users/uploads/added');
+    } else {
+      die('Something went wrong');
+    }
+  }
+  public function isLoggedIn()
+  {
+    if (isset($_SESSION['user_id'])) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
