@@ -93,7 +93,7 @@
                 <?php endif; ?>
                 <div class="desc">
                   <h3><a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>"><?= $articles->title; ?></a></h3>
-                  <p>
+                  <p class="text-truncate">
                     <?= $articles->content; ?>
                   </p>
                   <a class="mb-2" href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="icon-arrow-right3"></i></a>
