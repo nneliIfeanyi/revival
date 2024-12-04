@@ -18,14 +18,15 @@ class User
   public function insertIntoUploads($data)
   {
     // Prepare Query
-    $this->db->query('INSERT INTO uploads (link, title, preacher, details, thumbnail) 
-      VALUES (:link, :title, :preacher, :details, :thumbnail)');
+    $this->db->query('INSERT INTO uploads (link, title, preacher, category, details, thumbnail) 
+      VALUES (:link, :title, :preacher, :category, :details, :thumbnail)');
 
     // Bind Values
     $this->db->bind(':link', $data['link']);
     $this->db->bind(':title', $data['title']);
     $this->db->bind(':preacher', $data['preacher']);
     $this->db->bind(':details', $data['details']);
+    $this->db->bind(':category', $data['category']);
     $this->db->bind(':thumbnail', $data['thumbnail']);
 
     //Execute
@@ -122,6 +123,16 @@ class User
   public function getArticles()
   {
     $this->db->query("SELECT * FROM articles ORDER BY id DESC LIMIT 6;");
+    $rows = $this->db->resultset();
+
+    return $rows;
+  }
+
+  public function getSermonsByCategory($id, $category)
+  {
+    $this->db->query("SELECT * FROM uploads where category = :category AND id != :id ORDER BY id DESC LIMIT 6;");
+    $this->db->bind(':id', $id);
+    $this->db->bind(':category', $category);
     $rows = $this->db->resultset();
 
     return $rows;
@@ -323,12 +334,13 @@ class User
   public function editUpload($data)
   {
     // Prepare Query
-    $this->db->query('UPDATE uploads SET link = :link, title = :title, preacher = :preacher, details = :details WHERE id = :id');
+    $this->db->query('UPDATE uploads SET link = :link, title = :title, category = :category, preacher = :preacher, details = :details WHERE id = :id');
 
     // Bind Values
     $this->db->bind(':id', $data['id']);
     $this->db->bind(':link', $data['link']);
     $this->db->bind(':title', $data['title']);
+    $this->db->bind(':category', $data['category']);
     $this->db->bind(':preacher', $data['preacher']);
     $this->db->bind(':details', $data['details']);
 

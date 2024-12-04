@@ -59,6 +59,20 @@ class Pages extends Controller
     // Load about view
     $this->view('pages/study', $data);
   }
+  public function preview($id)
+  {
+    $core = $this->userModel->getCore(1);
+    $sermon = $this->userModel->getUploadById($id);
+    $recent = $this->userModel->getSermonsByCategory($id, $sermon->category);
+    $data = [
+      'sermon' => $sermon,
+      'core' => $core,
+      'recent' => $recent
+    ];
+
+    // Load about view
+    $this->view('pages/preview', $data);
+  }
 
 
   public function contact()
@@ -161,5 +175,12 @@ class Pages extends Controller
     } else {
       return false;
     }
-  }
+  }  // https://www.youtube.com/embed/VLTj-7dSEJs
+  // https://youtu.be/VLTj-7dSEJs?si=F_sohIV4MS6vxv-m
+
+  //  https://www.youtube.com/watch?v=9Oi3j-FNXxw
+  // https://youtu.be/9Oi3j-FNXxw?si=zjVEuJFvMAEyUy6k
+
+  // https://www.youtube.com/embed/tgbNymZ7vqY
+
 }

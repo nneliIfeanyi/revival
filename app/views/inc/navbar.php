@@ -10,33 +10,24 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="<?= URLROOT; ?>/pages" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= URLROOT; ?>/pages/resources" class="nav-link">Resources</a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= URLROOT; ?>/pages/contact" class="nav-link">Contact</a>
-          </li>
-          <?php if (isset($_SESSION['user_id'])): ?>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Settings
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/users/settings/core">Core data</a></li>
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/users/uploads/add">Video uploads</a></li>
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/users/articles/add">Articles</a></li>
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/pages/events/publish">Events</a></li>
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/users/verses/view">Verses</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="<?= URLROOT; ?>/users/logout">Logout</a></li>
-              </ul>
+          <?php if (!isset($_SESSION['user_id'])): ?>
+            <li class="nav-item">
+              <a href="<?= URLROOT; ?>/pages" class="nav-link">Home</a>
             </li>
+            <li class="nav-item">
+              <a href="<?= URLROOT; ?>/pages/resources" class="nav-link">Resources</a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= URLROOT; ?>/pages/contact" class="nav-link">Contact</a>
+            </li>
+          <?php else: ?>
+
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/settings/core">Core data</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/uploads/add">Video uploads</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/articles/add">Articles</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/pages/events/publish">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/verses/view">Verses</a></li>
+
           <?php endif ?>
         </ul>
       </div>

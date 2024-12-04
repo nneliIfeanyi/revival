@@ -58,11 +58,12 @@
         </div>
         <div class="row">
           <?php foreach ($data['uploads'] as $uploads): ?>
-            <div class="col-md-4 text-center animate-box">
+            <div class="col-md-4 text-center animate-box mb-3">
               <div class="sermon-entry">
                 <div class="sermon" style="background-image: url(<?= URLROOT . '/' . $uploads->thumbnail; ?>);">
+
                   <div class="play">
-                    <a class="popup-video" href="<?= $uploads->link; ?>"><i class="icon-play3"></i></a>
+                    <a class="" href="<?= URLROOT; ?>/pages/preview/<?= $uploads->id; ?>"><i class="icon-play3"></i></a>
                   </div>
                 </div>
                 <h3><?= $uploads->title; ?></h3>

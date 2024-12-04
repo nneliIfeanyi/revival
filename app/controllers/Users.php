@@ -141,7 +141,6 @@ class Users extends Controller
     }
     $core = $this->userModel->getCore(1);
     $articles = $this->userModel->getArticles2();
-    $article = $this->userModel->getArticleById($_GET['id']);
     $data = [
       'params' => $params,
       'author' => '',
@@ -149,10 +148,15 @@ class Users extends Controller
       'content' => '',
       'thumbnail' => '',
       'core' => $core,
-      'articles' => $articles,
-      'article' => $article,
+      'articles' => $articles
     ];
-
+    if ($params == 'edit') {
+      $article = $this->userModel->getArticleById($_GET['id']);
+      $data = [
+        'params' => $params,
+        'article' => $article,
+      ];
+    }
     // Load View
     $this->view('users/articles', $data);
   }
@@ -251,11 +255,11 @@ class Users extends Controller
       $target_dir = "videos/";
       $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
       $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
       $data = [
         'link' => val_entry($_POST['link']),
         'title' => val_entry($_POST['title']),
         'preacher' => val_entry($_POST['preacher']),
+        'category' => val_entry($_POST['category']),
         'details' => val_entry($_POST['details']),
         'thumbnail' => $target_file,
       ];
@@ -315,7 +319,7 @@ class Users extends Controller
         $data = [
           'author' => val_entry($_POST['author']),
           'title' => val_entry($_POST['title']),
-          'content' => val_entry($_POST['content']),
+          'content' => $_POST['content'],
           'thumbnail' => $target_file,
         ];
         if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
@@ -345,7 +349,6 @@ class Users extends Controller
         }
         if (empty($data['error'])) {
           move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-          $data['content'] = nl2br($data['content']);
           if ($this->userModel->insertIntoArticles($data)) {
             flash('msg', 'Article is saved successfully!');
             redirect('users/articles/add');
@@ -357,14 +360,13 @@ class Users extends Controller
         $data = [
           'author' => val_entry($_POST['author']),
           'title' => val_entry($_POST['title']),
-          'content' => val_entry($_POST['content']),
+          'content' => $_POST['content'],
           'thumbnail' => '',
         ];
         if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
           $data['error'] = 'All fields are required!';
           $this->view('users/articles', $data);
         } else {
-          $data['content'] = nl2br($data['content']);
           if ($this->userModel->insertIntoArticles($data)) {
             flash('msg', 'Article is saved successfully!');
             redirect('users/articles/add');
@@ -389,6 +391,7 @@ class Users extends Controller
         'title' => val_entry($_POST['title']),
         'preacher' => val_entry($_POST['preacher']),
         'details' => val_entry($_POST['details']),
+        'category' => val_entry($_POST['category']),
         'thumbnail' => '',
       ];
       if ($this->userModel->editUpload($data)) {
@@ -409,7 +412,7 @@ class Users extends Controller
         'id' => $id,
         'author' => val_entry($_POST['author']),
         'title' => val_entry($_POST['title']),
-        'content' => val_entry($_POST['content']),
+        'content' => $_POST['content'],
         'thumbnail' => '',
       ];
       if ($this->userModel->editArticle($data)) {

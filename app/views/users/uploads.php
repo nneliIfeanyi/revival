@@ -73,6 +73,19 @@
             <input id="preacher" type="text" name="preacher" required class="form-control form-control-lg" value="<?php echo $data['preacher']; ?>">
           </div>
           <div class="form-group">
+            <label for="category">Sermon category</label>
+            <select name="category" class="form-control form-control-lg" id="category">
+              <option value="discipleship">Discipleship</option>
+              <option value="leadership">Leadership</option>
+              <option value="revival">Revival</option>
+              <option value="marriage">Marriage</option>
+              <option value="mission">Mission</option>
+              <option value="service">Service</option>
+              <option value="Bible study">Bible study</option>
+              <option value="others">others</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="details">Preached At</label>
             <textarea id="details" name="details" placeholder="Enter meeting name and year" cols="20" rows="3" class="form-control"><?php echo $data['details']; ?></textarea>
           </div>
@@ -166,6 +179,20 @@
           <div class="form-group">
             <label for="preacher">Preached By</label>
             <input id="preacher" type="text" name="preacher" required class="form-control form-control-lg" value="<?php echo $data['upload']->preacher; ?>">
+          </div>
+          <div class="form-group">
+            <label for="category">Sermon category</label>
+            <select name="category" class="form-control form-control-lg" id="category">
+              <option value="<?php echo $data['upload']->category; ?>"><?php echo $data['upload']->category; ?></option>
+              <option value="discipleship">Discipleship</option>
+              <option value="leadership">Leadership</option>
+              <option value="revival">Revival</option>
+              <option value="marriage">Marriage</option>
+              <option value="mission">Mission</option>
+              <option value="service">Service</option>
+              <option value="Bible study">Bible study</option>
+              <option value="others">others</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="details">Preached At</label>

@@ -33,7 +33,7 @@
 						<div class="sermon-entry">
 							<div class="sermon" style="background-image: url(<?= URLROOT . '/' . $uploads->thumbnail; ?>);">
 								<div class="play">
-									<a class="popup-video" href="<?= $uploads->link; ?>"><i class="icon-play3"></i></a>
+									<a class="" href="<?= URLROOT; ?>/pages/preview/<?= $uploads->id; ?>"><i class="icon-play3"></i></a>
 								</div>
 							</div>
 							<h3><?= $uploads->title; ?></h3>
@@ -59,7 +59,7 @@
 								<p class="text-truncate">
 									<?= $articles->content; ?>
 								</p>
-								<a href="#">Read More <i class="icon-arrow-right3"></i></a>
+								<a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
 					</div>
