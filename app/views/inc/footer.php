@@ -5,8 +5,8 @@
             <h2><?= SITENAME; ?></h2>
             <p><?= $data['core']->address; ?></p>
             <ul class="social-icons">
-                <li><a href="#"><i class="icon-phone2"></i></a></li> <?= $data['core']->phone1; ?>
-                <li><a href="#"><i class="icon-whatsapp"></i></a></li> <?= $data['core']->phone2; ?>
+                <li><a href="#"><i class="bi bi-telephone"></i></a></li> <?= $data['core']->phone1; ?>
+                <li><a href="#"><i class="bi bi-whatsapp"></i></a></li> <?= $data['core']->phone2; ?>
             </ul>
             <!-- <ul class="social-icons">
                 <li><a href="#"><i class="icon-twitter2"></i></a></li>
@@ -18,9 +18,6 @@
         <small class="block">&copy; <?= date('Y'); ?> <?= SITENAME; ?>. All Rights Reserved.</small>
     </div>
 </footer>
-
-
-
 <!-- Bootstrap -->
 <script src="<?= URLROOT; ?>/js/bootstrap.bundle.min.js"></script>
 <!-- jQuery -->
@@ -42,6 +39,12 @@
 		<script src="assets/js/jquery.countTo.js"></script>
 		<!-- Main -->
 <script src="<?= URLROOT; ?>/js/main.js"></script>
+<script>
+    var button = document.getElementById('printBtn');
+    button.addEventListener('click', () => {
+        print();
+    })
+</script>
 </body>
 
 </html>

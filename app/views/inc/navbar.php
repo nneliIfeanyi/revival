@@ -18,18 +18,23 @@
               <a href="<?= URLROOT; ?>/pages/resources" class="nav-link">Resources</a>
             </li>
             <li class="nav-item">
+              <a href="<?= URLROOT; ?>/portal/register" class="nav-link">Register</a>
+            </li>
+            <li class="nav-item">
               <a href="<?= URLROOT; ?>/pages/contact" class="nav-link">Contact</a>
             </li>
           <?php else: ?>
 
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/settings/core">Core data</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/uploads/add">Video uploads</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/uploads/add">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/articles/add">Articles</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/pages/events/publish">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/registration">Database</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/verses/view">Verses</a></li>
-
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/logout">Signout</a></li>
           <?php endif ?>
         </ul>
       </div>
     </div>
   </nav><!-- End - Nav -->
+</header>

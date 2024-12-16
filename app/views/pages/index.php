@@ -63,7 +63,7 @@
                 <div class="sermon" style="background-image: url(<?= URLROOT . '/' . $uploads->thumbnail; ?>);">
 
                   <div class="play">
-                    <a class="" href="<?= URLROOT; ?>/pages/preview/<?= $uploads->id; ?>"><i class="icon-play3"></i></a>
+                    <a class="" href="<?= URLROOT; ?>/pages/preview/<?= $uploads->id; ?>"><i class="bi bi-play fs-4"></i></a>
                   </div>
                 </div>
                 <h3><?= $uploads->title; ?></h3>
@@ -73,7 +73,7 @@
           <?php endforeach; ?>
         </div>
       </div>
-      <a class="float-end" href="<?= URLROOT; ?>/pages/resources">More <i class="icon-arrow-right3"></i></a>
+      <a class="float-end" href="<?= URLROOT; ?>/pages/resources">More <i class="bi bi-arrow-right"></i></a>
     </section>
   <?php endif; ?>
 
@@ -97,7 +97,7 @@
                   <p class="text-truncate">
                     <?= $articles->content; ?>
                   </p>
-                  <a class="mb-2" href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="icon-arrow-right3"></i></a>
+                  <a class="mb-2" href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>

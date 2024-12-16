@@ -10,7 +10,7 @@
   <!-- Animate.css -->
   <link rel="stylesheet" href="<?= URLROOT; ?>/css/animate.css" />
   <!-- Icomoon Icon Fonts-->
-  <link rel="stylesheet" href="<?= URLROOT; ?>/css/icomoon.css" />
+  <link href="<?php echo URLROOT; ?>/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <!-- Bootstrap  -->
   <link rel="stylesheet" href="<?= URLROOT; ?>/css/bootstrap.css" />
   <!-- Flexslider -->
@@ -24,6 +24,31 @@
   <!-- Theme style  -->
   <link rel="stylesheet" href="<?= URLROOT; ?>/css/styles.css" />
   <title><?php echo SITENAME; ?></title>
+  <style type="text/css">
+    @media print {
+      @page {
+        margin: 0 10mm 0 10mm;
+      }
+
+      /* 
+            html {
+                margin: 0px;
+            }
+
+            body {
+                margin: 10mm 15mm 10mm 15mm;
+            } */
+      .header *,
+      #footer *,
+      #printBtn {
+        display: none;
+      }
+
+      #print {
+        margin: 0.1cm;
+      }
+    }
+  </style>
 </head>
 
 <body>

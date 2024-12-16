@@ -1,87 +1,80 @@
 <?php
-  class Post {
-    private $db;
-    
-    public function __construct(){
-      $this->db = new Database;
-    }
+class Post
+{
+  private $db;
 
-    // Get All Posts
-    public function getPosts(){
-      $this->db->query("SELECT *, 
-                        posts.id as postId, 
-                        users.id as userId
-                        FROM posts 
-                        INNER JOIN users 
-                        ON posts.user_id = users.id
-                        ORDER BY posts.created_at DESC;");
+  public function __construct()
+  {
+    $this->db = new Database;
+  }
 
-      $results = $this->db->resultset();
+  public function traceByCode($code)
+  {
+    $this->db->query("SELECT * FROM participants WHERE id2 = :id");
+    $this->db->bind(':id', $code);
+    $row = $this->db->single();
 
-      return $results;
-    }
-
-    // Get Post By ID
-    public function getPostById($id){
-      $this->db->query("SELECT * FROM posts WHERE id = :id");
-
-      $this->db->bind(':id', $id);
-      
-      $row = $this->db->single();
-
+    if ($this->db->rowCount() > 0) {
       return $row;
-    }
-
-    // Add Post
-    public function addPost($data){
-      // Prepare Query
-      $this->db->query('INSERT INTO posts (title, user_id, body) 
-      VALUES (:title, :user_id, :body)');
-
-      // Bind Values
-      $this->db->bind(':title', $data['title']);
-      $this->db->bind(':user_id', $data['user_id']);
-      $this->db->bind(':body', $data['body']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    // Update Post
-    public function updatePost($data){
-      // Prepare Query
-      $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
-
-      // Bind Values
-      $this->db->bind(':id', $data['id']);
-      $this->db->bind(':title', $data['title']);
-      $this->db->bind(':body', $data['body']);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    // Delete Post
-    public function deletePost($id){
-      // Prepare Query
-      $this->db->query('DELETE FROM posts WHERE id = :id');
-
-      // Bind Values
-      $this->db->bind(':id', $id);
-      
-      //Execute
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    } else {
+      return false;
     }
   }
+
+  public function traceByEmail($email)
+  {
+    $this->db->query("SELECT * FROM participants WHERE email = :email");
+    $this->db->bind(':email', $email);
+    $row = $this->db->single();
+
+    if ($this->db->rowCount() > 0) {
+      return $row;
+    } else {
+      return false;
+    }
+  }
+
+  public function allRegistered()
+  {
+    $this->db->query("SELECT * FROM participants ORDER BY surname;");
+    $rows = $this->db->resultset();
+
+    if ($this->db->rowCount() > 0) {
+      return $rows;
+    } else {
+      return false;
+    }
+  }
+  // Add Post
+  public function addParticipant($data)
+  {
+    // Prepare Query
+    $this->db->query('INSERT INTO participants (id2, title, surname, othernames, gender, residence, lga, r_state, phone, email, age, m_status, work, trainedAs,l_assembly,createdate) 
+      VALUES (:id2, :title, :surname, :othernames,:gender,:residence,:lga,:r_state,:phone,:email,:age,:m_status,:work,:trainedAs,:l_assembly,:createdate)');
+
+    // Bind Values
+    $this->db->bind(':id2', $data['id2']);
+    $this->db->bind(':title', $data['title']);
+    $this->db->bind(':surname', $data['surname']);
+    $this->db->bind(':othernames', $data['othernames']);
+    $this->db->bind(':gender', $data['gender']);
+    $this->db->bind(':residence', $data['residence']);
+    $this->db->bind(':lga', $data['lga']);
+    $this->db->bind(':r_state', $data['r_state']);
+    $this->db->bind(':phone', $data['phone']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':age', $data['age']);
+    $this->db->bind(':m_status', $data['m_status']);
+    $this->db->bind(':work', $data['work']);
+    $this->db->bind(':trainedAs', $data['trainedAs']);
+    $this->db->bind(':l_assembly', $data['l_assembly']);
+    $this->db->bind(':createdate', $data['createdate']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

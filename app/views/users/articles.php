@@ -79,6 +79,7 @@
                   <td>
                     <a class="text-success me-2" href="<?= URLROOT; ?>/pages/study/<?= $article->id; ?>">View</a>
                     <a class="text-success" href="<?= URLROOT; ?>/users/articles/edit?id=<?= $article->id; ?>">Edit</a>
+                    <a class="text-danger" href="<?= URLROOT; ?>/pages/del/<?= $article->id; ?>">Trash</a>
                   </td>
                 </tr>
               <?php $n++;
@@ -149,10 +150,10 @@
 
   tinymce.init({
     selector: 'textarea',
-    plugins: 'preview importcss searchreplace autolink autosave save visualblocks visualchars fullscreen image link table charmap pagebreak nonbreaking insertdatetime advlist lists wordcount charmap quickbars emoticons accordion',
+    plugins: 'preview importcss searchreplace autolink autosave save visualblocks visualchars fullscreen link table charmap pagebreak nonbreaking insertdatetime advlist lists wordcount charmap quickbars emoticons accordion',
     editimage_cors_hosts: ['picsum.photos'],
     menubar: 'edit view insert format tools table',
-    toolbar: "undo redo | blocks | bold italic underline strikethrough | align numlist bullist | link image | table | lineheight outdent indent| forecolor backcolor removeformat | accordion accordionremove | charmap emoticons | fullscreen preview | save print | pagebreak",
+    toolbar: "undo redo | blocks | bold italic underline strikethrough | align numlist bullist | link | table | lineheight outdent indent| forecolor backcolor removeformat | accordion accordionremove | charmap emoticons | fullscreen preview | print | pagebreak",
     autosave_ask_before_unload: true,
     autosave_interval: '30s',
     autosave_prefix: '{path}{query}-{id}-',
@@ -216,6 +217,8 @@
     noneditable_class: 'mceNonEditable',
     toolbar_mode: 'sliding',
     contextmenu: 'link image table',
+    statusbar: false,
+    promotion: false,
     skin: useDarkMode ? 'oxide-dark' : 'oxide',
     content_css: useDarkMode ? 'dark' : 'default',
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'

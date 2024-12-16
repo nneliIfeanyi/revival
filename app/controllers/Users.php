@@ -2,9 +2,11 @@
 class Users extends Controller
 {
   private $userModel;
+  private $postModel;
   public function __construct()
   {
     $this->userModel = $this->model('User');
+    $this->postModel = $this->model('Post');
   }
 
   public function index()
@@ -117,7 +119,6 @@ class Users extends Controller
     }
     $core = $this->userModel->getCore(1);
     $uploads = $this->userModel->getUploads2();
-    $upload = $this->userModel->getUploadById($_GET['id']);
     $data = [
       'params' => $params,
       'link' => '',
@@ -126,9 +127,16 @@ class Users extends Controller
       'details' => '',
       'thumbnail' => '',
       'uploads' => $uploads,
-      'upload' => $upload,
       'core' => $core
     ];
+    if ($params == 'edit') {
+      $upload = $this->userModel->getUploadById($_GET['id']);
+      $data = [
+        'params' => $params,
+        'upload' => $upload,
+        'core' => $core
+      ];
+    }
 
     // Load View
     $this->view('users/uploads', $data);
@@ -181,6 +189,22 @@ class Users extends Controller
     $this->view('users/verses', $data);
   }
 
+  public function registration()
+  {
+    if (!$this->isLoggedIn()) {
+      redirect('users/login');
+    }
+    $core = $this->userModel->getCore(1);
+    $users = $this->postModel->allRegistered();
+    $data = [
+      'core' => $core,
+      'users' => $users
+    ];
+
+    // Load View
+    $this->view('users/registra', $data);
+  }
+
   /*
 
   // Views UI Server Request Post Method //
@@ -201,8 +225,6 @@ class Users extends Controller
         'WWA' => val_entry($_POST['WWA']),
         'WWB' => val_entry($_POST['WWB']),
       ];
-      $data['WWA'] = nl2br($data['WWA']);
-      $data['WWB'] = nl2br($data['WWB']);
       if (empty($data['h1']) || empty($data['h1b']) || empty($data['para']) || empty($data['WWA']) ||  empty($data['WWB'])) {
         die('Something went wrong!');
       }

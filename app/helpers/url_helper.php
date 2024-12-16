@@ -5,99 +5,44 @@ function redirect($page)
   header('location: ' . URLROOT . '/' . $page);
 }
 
+
   /*
 
-  
-    public function register(){
-      // Check if logged in
-      if($this->isLoggedIn()){
-        redirect('posts');
-      }
-
-      // Check if POST
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Sanitize POST
-        $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        $data = [
-          'name' => trim($_POST['name']),
-          'email' => trim($_POST['email']),
-          'password' => trim($_POST['password']),
-          'confirm_password' => trim($_POST['confirm_password']),
-          'name_err' => '',
-          'email_err' => '',
-          'password_err' => '',
-          'confirm_password_err' => ''
-        ];
-
-        // Validate email
-        if(empty($data['email'])){
-            $data['email_err'] = 'Please enter an email';
-            // Validate name
-            if(empty($data['name'])){
-              $data['name_err'] = 'Please enter a name';
-            }
-        } else{
-          // Check Email
-          if($this->userModel->findUserByEmail($data['email'])){
-            $data['email_err'] = 'Email is already taken.';
-          }
-        }
-
-        // Validate password
-        if(empty($data['password'])){
-          $password_err = 'Please enter a password.';     
-        } elseif(strlen($data['password']) < 6){
-          $data['password_err'] = 'Password must have atleast 6 characters.';
-        }
-
-        // Validate confirm password
-        if(empty($data['confirm_password'])){
-          $data['confirm_password_err'] = 'Please confirm password.';     
-        } else{
-            if($data['password'] != $data['confirm_password']){
-                $data['confirm_password_err'] = 'Password do not match.';
-            }
-        }
-         
-        // Make sure errors are empty
-        if(empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
-          // SUCCESS - Proceed to insert
-
-          // Hash Password
-          $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
-          //Execute
-          if($this->userModel->register($data)){
-            // Redirect to login
-            flash('register_success', 'You are now registered and can log in');
-            redirect('users/login');
+  if (is_array($_FILES)) {
+        $file = $_FILES['photo']['tmp_name'];
+        $source_properties = getimagesize($file);
+        $image_type = $source_properties[2];
+        if ($image_type == IMAGETYPE_JPEG) {
+          $image_resource_id = imagecreatefromjpeg($file);
+          $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
+          imagejpeg($target_layer, "assets/img/" . $_FILES['photo']['name']);
+          $db_image_file =  "assets/img/" . $_FILES['photo']['name'];
+          if ($this->userModel->editPhoto($id, $db_image_file)) {
+            setcookie('photo', $db_image_file, time() + (86400 * 365), '/');
+            //$_SESSION['photo'] = $db_image_file;
+            flash('msg', 'Profile photo updated..');
+            echo "<script>
+                history.go(-2)
+          </script>";
           } else {
-            die('Something went wrong');
+            die('Something went wrong, try again later.');
           }
-           
-        } else {
-          // Load View
-          $this->view('users/register', $data);
+        } elseif ($image_type == IMAGETYPE_PNG) {
+          $image_resource_id = imagecreatefrompng($file);
+          $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
+          imagepng($target_layer, "assets/img/" . $_FILES['photo']['name']);
+          $db_image_file =  "assets/img/" . $_FILES['photo']['name'];
+          if ($this->userModel->editPhoto($id, $db_image_file)) {
+            setcookie('photo', $db_image_file, time() + (86400 * 365), '/');
+            //$_SESSION['photo'] = $db_image_file;
+            flash('msg', 'Profile photo updated..');
+            echo "<script>
+                history.go(-2)
+          </script>";
+          } else {
+            die('Something went wrong, try again later.');
+          }
         }
-      } else {
-        // IF NOT A POST REQUEST
-
-        // Init data
-        $data = [
-          'name' => '',
-          'email' => '',
-          'password' => '',
-          'confirm_password' => '',
-          'name_err' => '',
-          'email_err' => '',
-          'password_err' => '',
-          'confirm_password_err' => ''
-        ];
-
-        // Load View
-        $this->view('users/register', $data);
-      }
-    }
+      } // End if is_array
 
     */

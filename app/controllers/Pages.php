@@ -175,12 +175,15 @@ class Pages extends Controller
     } else {
       return false;
     }
-  }  // https://www.youtube.com/embed/VLTj-7dSEJs
-  // https://youtu.be/VLTj-7dSEJs?si=F_sohIV4MS6vxv-m
-
-  //  https://www.youtube.com/watch?v=9Oi3j-FNXxw
-  // https://youtu.be/9Oi3j-FNXxw?si=zjVEuJFvMAEyUy6k
-
-  // https://www.youtube.com/embed/tgbNymZ7vqY
-
+  }
+  public function del($id)
+  {
+    if ($this->userModel->deleteArticle($id)) {
+      unlink($_GET['thumbnail']);
+      flash('msg', 'Post Removed', 'alert alert-danger');
+      redirect('users/articles/added');
+    } else {
+      die('Something went wrong');
+    }
+  }
 }

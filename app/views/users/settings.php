@@ -20,13 +20,13 @@
             <textarea type="text" id="para" name="para" cols="20" rows="2" required class="form-control"><?php echo $data['para']; ?></textarea>
           </div>
           <div class="form-group">
-            <label for="WWA">Whom We Are <span style="font-size: x-small;">(use new lines for paragraphs)</span></label>
-            <textarea id="WWA" name="WWA" required cols="50" rows="15" class="form-control"><?php echo $data['WWA']; ?></textarea>
+            <label for="WWA">Whom We Are </label>
+            <textarea class="tiny" id="WWA" name="WWA" class="form-control"><?php echo $data['WWA']; ?></textarea>
           </div>
 
           <div class="form-group">
-            <label for="WWB">What We Believe <span style="font-size: x-small;">(use new lines for paragraphs)</span></label>
-            <textarea id="WWB" name="WWB" required cols="50" rows="15" class="form-control form-control-lg"><?php echo $data['WWB']; ?></textarea>
+            <label for="WWB">What We Believe</label>
+            <textarea class="tiny" id="WWB" name="WWB" class="form-control form-control-lg"><?php echo $data['WWB']; ?></textarea>
           </div>
           <div class="d-flex">
             <div class="col">
@@ -83,3 +83,16 @@
   </div>
 <?php endif; ?>
 <?php require APPROOT . '/views/inc/foot.php'; ?>
+<script src="<?= URLROOT; ?>/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: 'textarea.tiny',
+    height: 350,
+    plugins: '',
+    menubar: '',
+    toolbar: '',
+    newline_behavior: 'linebreak',
+    statusbar: false,
+    promotion: false,
+  });
+</script>
