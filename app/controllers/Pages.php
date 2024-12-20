@@ -93,11 +93,9 @@ class Pages extends Controller
     }
     $core = $this->userModel->getCore(1);
     $events = $this->userModel->getEvents();
-    $event = $this->userModel->getEventById($_GET['id']);
     $data = [
       'params' => $params,
       'events' => $events,
-      'event'  => $event,
       'core' => $core,
       'name' => '',
       'theme' => '',
@@ -105,6 +103,14 @@ class Pages extends Controller
       'startDate' => '',
       'endDate' => ''
     ];
+    if ($params == 'edit') {
+      $event = $this->userModel->getEventById($_GET['id']);
+      $data = [
+        'params' => $params,
+        'event'  => $event,
+        'core' => $core
+      ];
+    }
 
     // Load about view
     $this->view('pages/events', $data);

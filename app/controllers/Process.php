@@ -18,10 +18,11 @@ class Process extends Controller
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST
+            $state = strtoupper($_POST['r_state']);
+            $state = substr($state, 0, 2);
             $core = $this->userModel->getCore(1);
             $data = [
-                'id2' => 'RL-' . rand(100, 900) . substr(md5(time()), 28),
+                'id2' => 'RL-' . $state . rand(10000, 90000),
                 'title' => val_entry($_POST['title']),
                 'surname' => val_entry($_POST['surname']),
                 'othernames' => val_entry($_POST['othernames']),
@@ -40,7 +41,6 @@ class Process extends Controller
                 'param' => 'success',
                 'core' => $core
             ];
-
             if ($row = $this->postModel->traceByEmail($data['email'])) {
                 $data['id2'] = $row->id2;
                 flash('msg', 'Already Registered!');

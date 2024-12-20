@@ -25,10 +25,10 @@
             </li>
           <?php else: ?>
 
-            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/settings/core">Core data</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/settings/core">Core</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/uploads/add">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/articles/add">Articles</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/pages/events/publish">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/pages/events/view">Events</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/registration">Database</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/verses/view">Verses</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= URLROOT; ?>/users/logout">Signout</a></li>

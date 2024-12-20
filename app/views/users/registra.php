@@ -28,7 +28,7 @@
                         foreach ($data['users'] as $user): ?>
                             <tr>
                                 <th scope="row"><?= $n; ?></th>
-                                <td><?= $user->surname; ?></td>
+                                <td><?= $user->title; ?> <?= $user->surname; ?> <?= $user->othernames; ?></td>
                                 <td><?= $user->id2; ?></td>
                                 <td><?= $user->phone; ?></td>
                                 <td>

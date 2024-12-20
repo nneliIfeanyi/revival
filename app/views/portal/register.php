@@ -4,9 +4,9 @@
     <div class="col-lg-6 col-md-9 mx-auto">
         <div class="card card-body bg-light my-5 py-5">
             <?php echo flash('msg'); ?>
-            <h2 class="text-center fw-semibold">REVIVAL LABOURERS RETREAT REGISTRATION</h2>
-            <p class="text-center text-muted lead">Please fill the form below to register and get your <span class="text-success">RL-Code,</span>
-                If you already registered previously, kindly click <a class="text-success" href="<?= URLROOT; ?>/portal/registered/rlcode">here</a> to download registration tag</p>
+            <h2 class="fw-semibold h3">REGISTRATION FORM</h2>
+            <p class="text-muted lead m-0">Please fill the form below to register and get your <span class="text-success">RL-Code,</span>
+                If you already registered previously, kindly click <a class="text-success" href="<?= URLROOT; ?>/portal/registered/rlcode">here</a> to download registration tag.</p>
             <hr />
             <form method="POST" action="<?= URLROOT; ?>/process/register">
                 <div class="form-group mb-2">

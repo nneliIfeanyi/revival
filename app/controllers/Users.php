@@ -222,8 +222,8 @@ class Users extends Controller
         'h1' => val_entry($_POST['h1']),
         'h1b' => val_entry($_POST['h1b']),
         'para' => val_entry($_POST['para']),
-        'WWA' => val_entry($_POST['WWA']),
-        'WWB' => val_entry($_POST['WWB']),
+        'WWA' => $_POST['WWA'],
+        'WWB' => $_POST['WWB'],
       ];
       if (empty($data['h1']) || empty($data['h1b']) || empty($data['para']) || empty($data['WWA']) ||  empty($data['WWB'])) {
         die('Something went wrong!');

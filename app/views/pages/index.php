@@ -146,9 +146,10 @@
         <?php foreach ($data['events'] as $event): ?>
           <div class="col-md-4 animate-box">
             <div class="events-entry">
-              <span class="date"><?= $event->startDate; ?> </span>
+              <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
               <h3><?= $event->name; ?> | <?= $event->theme; ?></h3>
               <p><?= $event->details; ?></p>
+              <a class="mb-2" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
             </div>
           </div>
         <?php endforeach; ?>
