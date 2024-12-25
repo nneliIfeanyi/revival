@@ -78,7 +78,7 @@
   <?php endif; ?>
 
   <?php if (!empty($data['articles'])): ?>
-    <section id="articles" class="light-grey">
+    <!-- <section id="articles" class="light-grey">
       <div class="container">
         <div class="row animate-box">
           <div class="col-md-6 offset-md-3 text-center heading">
@@ -104,7 +104,7 @@
           <?php endforeach; ?>
         </div>
       </div>
-    </section>
+    </section> -->
   <?php endif; ?>
 
   <?php if (!empty($data['verses'])): ?>
@@ -139,9 +139,10 @@
     <div class="container">
       <div class="row animate-box">
         <div class="col-md-6 offset-md-3 text-center heading">
-          <h2 class="m-0">Upcoming Meetings</h2>
+          <h2 class="m-0">Upcoming Meeting</h2>
         </div>
       </div>
+
       <div class="row">
         <?php foreach ($data['events'] as $event): ?>
           <div class="col-md-4 animate-box">

@@ -40,6 +40,7 @@
             } */
       .header *,
       #footer *,
+      #para,
       #printBtn {
         display: none;
       }
