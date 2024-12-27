@@ -2,22 +2,39 @@
 <section class="hero-section">
   <div class="flexslider px-0">
     <ul class="slides list-unstyled mt-4">
-      <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+      <li style="background-image: url(<?= URLROOT; ?>/images/rev1.jpg);">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
             <div class="col-md-8 offset-md-2 text-center">
               <div class="slider-text">
                 <div class="slider-text-inner">
-                  <h1 class="h1 fw-bold"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
-                  <h2 style="color: antiquewhite;"><?= $data['core']->para; ?></h2>
-                  <!-- <p><a class="btn btn-primary btn-demo popup-video my-2" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a href="" class="btn btn-primary btn-learn my-2">Join us here! <i class="icon-arrow-right3"></i></a></p> -->
+                  <h1 class="h1 fw-bold"></h1>
+                  <h2 style="color: antiquewhite;"></h2>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </li>
+      <?php foreach ($data['events'] as $event): ?>
+        <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 offset-md-2 text-center">
+                <div class="slider-text">
+                  <div class="slider-text-inner">
+                    <h1 class="h1 fw-bold"><?= $event->name; ?> <br /> <?= $event->theme; ?></h1>
+                    <h2 style="color: antiquewhite;"><?= $event->details; ?></h2>
+                    <p><a class="btn btn-primary btn-demo my-2" href="<?= URLROOT; ?>/portal/register"> Register here</a> <a href="<?= URLROOT; ?>/portal/registered/rlcode" class="btn btn-primary btn-learn my-2">Retrieve RL-code <i class="icon-arrow-right3"></i></a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      <?php endforeach; ?>
     </ul>
   </div>
 </section>

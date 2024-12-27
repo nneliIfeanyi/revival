@@ -38,7 +38,6 @@
         <div class="col-lg-6 col-md-9 mx-auto">
             <div class="card card-body bg-light my-5 pb-5">
                 <?php echo flash('msg'); ?>
-                <h2 class="m-0"><?= SITENAME; ?></h2>
                 <p class="text-muted lead">
                     If you have registered online previously for any of our programmes, kindly enter your <span class="text-success">RL-Code</span> to print or download registration tag.
                 </p>
