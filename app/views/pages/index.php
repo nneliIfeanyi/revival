@@ -2,32 +2,17 @@
 <section class="hero-section">
   <div class="flexslider px-0">
     <ul class="slides list-unstyled mt-4">
-      <li style="background-image: url(<?= URLROOT; ?>/images/rev1.jpg);">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 offset-md-2 text-center">
-              <div class="slider-text">
-                <div class="slider-text-inner">
-                  <h1 class="h1 fw-bold"></h1>
-                  <h2 style="color: antiquewhite;"></h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
       <?php foreach ($data['events'] as $event): ?>
-        <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+        <li style="background-image: url(<?= URLROOT; ?>/images/portal.jpg);">
           <div class="overlay"></div>
           <div class="container">
             <div class="row">
               <div class="col-md-8 offset-md-2 text-center">
                 <div class="slider-text">
                   <div class="slider-text-inner">
-                    <h1 class="h1 fw-bold"><?= $event->name; ?> <br /> <?= $event->theme; ?></h1>
-                    <h2 style="color: antiquewhite;"><?= $event->details; ?></h2>
-                    <p><a class="btn btn-primary btn-demo my-2" href="<?= URLROOT; ?>/portal/register"> Register here</a> <a href="<?= URLROOT; ?>/portal/registered/rlcode" class="btn btn-primary btn-learn my-2">Retrieve RL-code <i class="icon-arrow-right3"></i></a></p>
+                    <h1 class="h1 fw-bold"><?= strtoupper($event->name); ?><br /> <span class="fst-italic fw-lighter" style="font-size: x-small;">Theme</span><br> <?= $event->theme; ?></h1>
+                    <h2 style="color: antiquewhite;"></h2>
+                    <p><a class="btn btn-o-primary" href="<?= URLROOT; ?>/portal/register"> Register here</a> </p>
                   </div>
                 </div>
               </div>
@@ -35,6 +20,22 @@
           </div>
         </li>
       <?php endforeach; ?>
+      <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+              <div class="slider-text">
+                <div class="slider-text-inner">
+                  <h1 class="h1 fw-bold"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
+                  <h2 style="color: antiquewhite;"><?= $data['core']->para; ?></h2>
+                  <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </section>
@@ -154,20 +155,23 @@
 
   <section id="events">
     <div class="container">
-      <div class="row animate-box">
+      <!-- <div class="row animate-box">
         <div class="col-md-6 offset-md-3 text-center heading">
           <h2 class="m-0">Upcoming Meeting</h2>
         </div>
-      </div>
-
+      </div> -->
       <div class="row">
+        <div class="col-md-6 offset-md-3 text-center heading">
+          <h2 class="">Upcoming Meeting</h2>
+        </div>
         <?php foreach ($data['events'] as $event): ?>
           <div class="col-md-4 animate-box">
             <div class="events-entry">
+              <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
               <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
-              <h3><?= $event->name; ?> | <?= $event->theme; ?></h3>
+              <h3 class="fw-light"><?= $event->name; ?> | <?= $event->theme; ?></h3>
               <p><?= $event->details; ?></p>
-              <a class="mb-2" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
+              <a class="btn btn-primary" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
             </div>
           </div>
         <?php endforeach; ?>
