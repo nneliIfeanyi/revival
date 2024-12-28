@@ -20,7 +20,7 @@
           </div>
         </li>
       <?php endforeach; ?>
-      <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+      <!-- <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
@@ -29,13 +29,13 @@
                 <div class="slider-text-inner">
                   <h1 class="h2 fw-light"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
                   <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
-                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> -->
+                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> --
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </li>
+      </li> -->
     </ul>
   </div>
 </section>

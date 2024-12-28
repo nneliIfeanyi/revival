@@ -15,21 +15,37 @@ class Portal extends Controller
         // Index page redirects to registration page
         redirect('portal/register');
     }
+
+    //////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function register()
     {
         $core = $this->userModel->getCore(1);
         $data = ['core' => $core,];
         $this->view('portal/register', $data);
     }
+
+    //////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function registered($param)
     {
+        $valid = $this->postModel->traceByCode($_SESSION['rlcode']);
         $core = $this->userModel->getCore(1);
         $data = [
             'param' => $param,
+            'title' => $valid->title,
+            'surname' => $valid->surname,
+            'othernames' => $valid->othernames,
+            'id2' => $valid->id2,
             'core' => $core,
-            'err' => '',
-            'rl_code' => '',
+            'phone' => $valid->phone,
+            'email' => $valid->email,
         ];
+
         $this->view('portal/registered', $data);
     }
 }

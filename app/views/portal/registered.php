@@ -5,20 +5,30 @@
 
             <div class="card p-4 mt-5">
                 <div class="row">
-                    <div class="col-12 border-bottom">
-                        <h1 class="h2 text-center fw-bold text-success m-0"><?= SITENAME; ?></h1>
-                        <p class="lead text-center m-0">ONLINE REGISTRATION</p>
+                    <div class="text-center col-12 border-bottom">
+                        <!-- <h1 class="h2 text-center fw-bold text-success m-0"><?= SITENAME; ?></h1> -->
+                        <img src="<?php echo URLROOT; ?>/images/rev2.jpg" alt="logo img" class="mb-2" style="width:140px; height: 140px;">
+                        <h5 class="fst-italic fw-bold">ONLINE REGISTRATION</h5>
                     </div>
                     <div class="row border-bottom">
-                        <div class="col-6 px-4 py-3">
-                            <img src="<?= URLROOT; ?>/img/user.png" height="138px" width="100%" alt="Avater image">
+                        <div class="col-12 py-3">
+                            <img src="<?= URLROOT; ?>/images/rev1.jpg" class="img-fluid" alt="banner image">
                         </div>
-                        <div class="col-6 fst-italic fw-bold lead py-4 mt-3">
-                            <?= strtoupper($data['title']) ?> <br><?= strtoupper($data['surname']); ?> <br><?= strtoupper($data['othernames']); ?>
+                        <div class="form-group mb-2">
+                            <label>Full Name</label>
+                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['title']) ?> <?= strtoupper($data['surname']); ?> <?= strtoupper($data['othernames']); ?>">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label>Phone Number</label>
+                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['phone']) ?>">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label>Email</label>
+                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['email']) ?>">
                         </div>
                     </div>
                     <div class="col-12">
-                        <p class="lead text-center py-2 m-0 fw-bold text-success">Your registration was successfull!</p>
+                        <p class="lead text-center py-2 m-0 fw-bold text-success text-uppercase">Your registration was successfull!</p>
                         <p class="lead text-center m-0"><span class="fs-6">RL-Code</span> | <span class="fw-bold fst-italic"><?= $data['id2'] ?></span></p>
 
 

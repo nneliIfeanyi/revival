@@ -3,12 +3,13 @@
 <div class="row">
     <div class="col-lg-6 col-md-9 mx-auto">
         <div class="card card-body bg-light my-5 py-5">
-            <?php echo flash('msg'); ?>
+            <!-- Ajax form submit response -->
+            <!-- <div id="ajaxRes"></div> -->
             <h2 class="fw-semibold h3">REGISTRATION FORM</h2>
             <p class="text-muted lead m-0">Please fill the form below to register and get your <span class="text-success">RL-Code,</span>
                 If you already registered previously, kindly click <a class="text-success" href="<?= URLROOT; ?>/portal/registered/rlcode">here</a> to download registration tag.</p>
             <hr />
-            <form method="POST" action="<?= URLROOT; ?>/process/register">
+            <form id="register">
                 <div class="form-group mb-2">
                     <div class="row">
                         <div class="col-4">
@@ -93,6 +94,7 @@
                     <label>Church Name And Address</label>
                     <input type="text" name="l_assembly" required class="form-control form-control-lg">
                 </div>
+                <div id="ajaxRes"></div>
                 <div class="d-grid mt-4">
                     <input type="submit" id="submit" class="btn btn-success" value="Register Now">
                 </div>
@@ -102,3 +104,26 @@
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+<script>
+    $('#register').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "<?= URLROOT; ?>/process/register",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                $('#submit').attr('disabled', 'disabled');
+                $('#submit').val('Processing, Pls Wait ....');
+
+            },
+            success: function(data) {
+                $('#submit').attr('disabled', false);
+                $('#submit').val('SUBMIT');
+                $('#ajaxRes').html(data);
+            }
+        });
+
+    });
+</script>

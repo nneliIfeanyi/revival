@@ -2,7 +2,8 @@
     <div class="container">
 
         <div class="col-md-6 offset-md-3 text-center pb-5">
-            <h2><?= SITENAME; ?></h2>
+            <img src="<?php echo URLROOT; ?>/images/rev2.jpg" alt="logo img" class="rounded-circle mb-2" style="width:140px; height: 140px;">
+            <h5 class="fst-italic fw-bold text-light"><?= SITENAME; ?></h5>
             <p><?= $data['core']->address; ?></p>
             <ul class="social-icons">
                 <li><a href="#"><i class="bi bi-telephone"></i></a></li> <?= $data['core']->phone1; ?>

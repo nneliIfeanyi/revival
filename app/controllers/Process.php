@@ -41,21 +41,40 @@ class Process extends Controller
                 'param' => 'success',
                 'core' => $core
             ];
-            if ($row = $this->postModel->traceByEmail($data['email'])) {
-                $data['id2'] = $row->id2;
-                flash('msg', 'Already Registered!');
-                $this->view('portal/registered', $data);
-                //redirect('portal/registered/success');
+            if ($this->postModel->traceByEmail($data['email'])) {
+                echo "<p class='alert alert-danger fade show' role='alert'>
+            <i class='bi bi-check-circle'></i>  &nbsp;Email already in use!
+            </p>
+            ";
             } else {
                 $this->postModel->addParticipant($data);
                 flash('msg', 'REGISTRATION SUCCESSFULL!');
-                $this->view('portal/registered', $data);
-                //redirect('portal/registered/success');
+                $_SESSION['rlcode'] = $data['id2'];
+                $redirect = URLROOT . '/portal/registered/success';
+                echo "><meta http-equiv='refresh' content='0; $redirect'>
+        ";
             }
         } else {
             redirect('portal/register');
         }
     }
+    ////////////////////////////////////////////////////////////
+
+    /*
+
+
+ if ($row = $this->postModel->traceByEmail($data['email'])) {
+                $data['id2'] = $row->id2;
+                flash('msg', 'Already Registered!');
+                $this->view('portal/registered', $data);
+                //redirect('portal/registered/success');
+            }
+
+
+*/
+
+
+    /////////////////////////////////////////////////////////////////////
     public function rlcode()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -75,15 +94,8 @@ class Process extends Controller
                 $data['err'] = 'Code does not exist, pls crosscheck and try again';
                 $this->view('portal/registered', $data);
             } else {
-                $data = [
-                    'param' => 'success',
-                    'title' => $valid->title,
-                    'surname' => $valid->surname,
-                    'othernames' => $valid->othernames,
-                    'id2' => $valid->id2,
-                    'core' => $core
-                ];
-                $this->view('portal/registered', $data);
+                $_SESSION['rlcode'] = $data['rl_code'];
+                redirect('portal/registered/success');
             }
         } else {
             redirect('portal/registered/rlcode');
