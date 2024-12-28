@@ -10,9 +10,9 @@
               <div class="col-md-8 offset-md-2 text-center">
                 <div class="slider-text">
                   <div class="slider-text-inner">
-                    <h1 class="h1 fw-bold"><?= strtoupper($event->name); ?><br /> <span class="fst-italic fw-lighter" style="font-size: x-small;">Theme</span><br> <?= $event->theme; ?></h1>
+                    <h1 class="h3 fw-bold"><?= strtoupper($event->name); ?><br /> <span class="fst-italic fw-lighter" style="font-size: x-small;">Theme</span><br> <span class="fst-italic" style="color: antiquewhite;"><?= $event->theme; ?></span></h1>
                     <h2 style="color: antiquewhite;"></h2>
-                    <p><a class="btn btn-o-primary" href="<?= URLROOT; ?>/portal/register"> Register here</a> </p>
+                    <a class="btn btn-success" href="<?= URLROOT; ?>/portal/register"> Register here</a>
                   </div>
                 </div>
               </div>
@@ -27,9 +27,9 @@
             <div class="col-md-8 offset-md-2 text-center">
               <div class="slider-text">
                 <div class="slider-text-inner">
-                  <h1 class="h1 fw-bold"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
-                  <h2 style="color: antiquewhite;"><?= $data['core']->para; ?></h2>
-                  <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p>
+                  <h1 class="h2 fw-light"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
+                  <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
+                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> -->
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
               <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
               <h3 class="fw-light"><?= $event->name; ?> | <?= $event->theme; ?></h3>
               <p><?= $event->details; ?></p>
-              <a class="btn btn-primary" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
+              <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
             </div>
           </div>
         <?php endforeach; ?>
