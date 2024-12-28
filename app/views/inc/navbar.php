@@ -1,8 +1,8 @@
 <header class="header">
-  <nav class="navbar navbar-nav navbar-expand-lg fixed-top bg-light shadow">
+  <nav class="navbar navbar-nav navbar-expand-lg fixed-top bg-white shadow">
     <div class="container">
       <a href="<?= URLROOT; ?>/pages" class="navbar-brand d-flex align-items-center justify-content-start">
-        <img src="<?php echo URLROOT; ?>/images/rev2.jpg" alt="logo img" style="width:40px; height: 40px;">
+        <!-- <img src="<?php echo URLROOT; ?>/images/rev2.jpg" alt="logo img" style="width:40px; height: 40px;"> -->
         <img src="<?php echo URLROOT; ?>/images/usepng.png" alt="logo img" style="width:224px; height: 44px;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-theme="" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
