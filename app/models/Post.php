@@ -77,4 +77,53 @@ class Post
       return false;
     }
   }
+
+  public function updateParticipant($data)
+  {
+    // Prepare Query
+    $this->db->query('UPDATE participants SET title = :title, surname = :surname, othernames = :othernames,
+      gender = :gender, residence = :residence, lga = :lga, r_state = :r_state, phone = :phone, email = :email,
+      age = :age, m_status = :m_status, work = :work, trainedAs = :trainedAs, l_assembly = :l_assembly WHERE id2 = :id2');
+
+    // Bind Values
+    $this->db->bind(':id2', $data['id2']);
+    $this->db->bind(':title', $data['title']);
+    $this->db->bind(':surname', $data['surname']);
+    $this->db->bind(':othernames', $data['othernames']);
+    $this->db->bind(':gender', $data['gender']);
+    $this->db->bind(':residence', $data['residence']);
+    $this->db->bind(':lga', $data['lga']);
+    $this->db->bind(':r_state', $data['r_state']);
+    $this->db->bind(':phone', $data['phone']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':age', $data['age']);
+    $this->db->bind(':m_status', $data['m_status']);
+    $this->db->bind(':work', $data['work']);
+    $this->db->bind(':trainedAs', $data['trainedAs']);
+    $this->db->bind(':l_assembly', $data['l_assembly']);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  public function deleteUser($id)
+  {
+    // Prepare Query
+    $this->db->query('DELETE FROM participants WHERE id2 = :id');
+
+    // Bind Values
+    $this->db->bind(':id', $id);
+
+    //Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

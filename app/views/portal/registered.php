@@ -22,10 +22,12 @@
                             <label>Phone Number</label>
                             <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['phone']) ?>">
                         </div>
-                        <div class="form-group mb-2">
-                            <label>Email</label>
-                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['email']) ?>">
-                        </div>
+                        <?php if (!empty($data['email'])): ?>
+                            <div class="form-group mb-2">
+                                <label>Email</label>
+                                <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['email']) ?>">
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="col-12">
                         <p class="lead text-center py-2 m-0 fw-bold text-success text-uppercase">Your registration was successfull!</p>
@@ -41,8 +43,8 @@
             </div>
         </div>
     </div>
-
-<?php elseif ($data['param'] == 'rlcode'): ?>
+<?php endif; ?>
+<?php if ($data['param'] == 'rlcode'): ?>
     <div class="mt-5"></div>
     <div class="row">
         <div class="col-lg-6 col-md-9 mx-auto">

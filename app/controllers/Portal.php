@@ -48,4 +48,29 @@ class Portal extends Controller
 
         $this->view('portal/registered', $data);
     }
+
+    //////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function edit($id)
+    {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('pages');
+        }
+        $core = $this->userModel->getCore(1);
+        $valid = $this->postModel->traceByCode($id);
+        $data = ['core' => $core, 'user' => $valid];
+        $this->view('portal/edit', $data);
+    }
+
+    public function delete($id)
+    {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('pages');
+        }
+        $this->postModel->deleteUser($id);
+        flash('msg', 'Delete Successful!', 'alert alert-danger');
+        redirect('users/registration');
+    }
 }

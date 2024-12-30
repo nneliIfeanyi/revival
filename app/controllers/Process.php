@@ -58,23 +58,10 @@ class Process extends Controller
             redirect('portal/register');
         }
     }
-    ////////////////////////////////////////////////////////////
-
-    /*
-
-
- if ($row = $this->postModel->traceByEmail($data['email'])) {
-                $data['id2'] = $row->id2;
-                flash('msg', 'Already Registered!');
-                $this->view('portal/registered', $data);
-                //redirect('portal/registered/success');
-            }
-
-
-*/
-
 
     /////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     public function rlcode()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -99,6 +86,43 @@ class Process extends Controller
             }
         } else {
             redirect('portal/registered/rlcode');
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+
+    public function edit($id2)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $core = $this->userModel->getCore(1);
+            $data = [
+                'id2' => $id2,
+                'title' => val_entry($_POST['title']),
+                'surname' => val_entry($_POST['surname']),
+                'othernames' => val_entry($_POST['othernames']),
+                'gender' => val_entry($_POST['gender']),
+                'phone' => val_entry($_POST['phone']),
+                'email' => val_entry($_POST['email']),
+                'residence' => val_entry($_POST['residence']),
+                'age' => val_entry($_POST['age']),
+                'lga' => val_entry($_POST['lga']),
+                'm_status' => val_entry($_POST['m_status']),
+                'work' => val_entry($_POST['work']),
+                'trainedAs' => val_entry($_POST['trainedAs']),
+                'l_assembly' => val_entry($_POST['l_assembly']),
+                'r_state' => val_entry($_POST['r_state']),
+                'core' => $core
+            ];
+            if ($this->postModel->updateParticipant($data)) {
+                echo "<p class='alert alert-success fade show' role='alert'>
+            <i class='bi bi-check-circle'></i>  &nbsp;Changes Saved Successfully!
+            </p>
+            ";
+            }
+        } else {
+            redirect('portal/edit/' . $id2);
         }
     }
 }

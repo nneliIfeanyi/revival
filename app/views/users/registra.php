@@ -10,7 +10,7 @@
                 </div>
             <?php endif; ?>
             <h2 class="lead m-0"><?= SITENAME; ?> Database</h2>
-            <p class="h5"><a href="<?= URLROOT; ?>/portal/register">New Registration</a></p>
+            <p class="h5"><a href="<?= URLROOT; ?>/portal/register"><i class="bi bi-plus-circle"></i> New Registration</a></p>
             <hr>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -32,7 +32,7 @@
                                 <td><?= $user->id2; ?></td>
                                 <td><?= $user->phone; ?></td>
                                 <td>
-                                    <a class="text-success me-2" href="">View</a>
+                                    <a class="text-success me-2" href="<?= URLROOT; ?>/portal/edit/<?= $user->id2; ?>">View</a>
                                 </td>
                             </tr>
                         <?php $n++;
