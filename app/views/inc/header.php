@@ -10,6 +10,8 @@
   <!-- Animate.css -->
   <link rel="stylesheet" href="<?= URLROOT; ?>/css/animate.css" />
   <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.0/css/buttons.dataTables.css">
   <link href="<?php echo URLROOT; ?>/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <!-- Bootstrap  -->
   <link rel="stylesheet" href="<?= URLROOT; ?>/css/bootstrap.css" />
@@ -48,6 +50,47 @@
       #print {
         margin: 0.1cm;
       }
+    }
+
+    /*Parsley validate*/
+    input.parsley-error,
+    select.parsley-error,
+    textarea.parsley-error {
+      border-color: #D43F3A;
+      box-shadow: none;
+    }
+
+    input.parsley-error:focus,
+    select.parsley-error:focus,
+    textarea.parsley-error:focus {
+      border-color: #D43F3A;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #FF8F8A;
+    }
+
+    input.parsley-success,
+    select.parsley-success,
+    textarea.parsley-success {
+      border-color: #398439;
+      box-shadow: none;
+    }
+
+    input.parsley-success:focus,
+    select.parsley-success:focus,
+    textarea.parsley-success:focus {
+      border-color: #398439;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #89D489
+    }
+
+    .parsley-errors-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+
+    .parsley-errors-list.filled {
+      color: #D43F3A;
+      opacity: 1;
     }
   </style>
 </head>

@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label>Phone Number</label>
-                    <input type="number" name="phone" required required data-parsley-type='number' maxlength="11" data-parsley-length="[11, 11]" data-parsley-trigger="keyup" pattern="\d{11}" class=" form-control form-control-lg">
+                    <input type="number" name="phone" required data-parsley-type='number' maxlength="11" data-parsley-length="[11, 11]" data-parsley-trigger="keyup" pattern="\d{11}" class=" form-control form-control-lg">
                 </div>
                 <div class="form-group mb-4">
                     <label>Age Bracket</label>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <label>Occupation</label>
-                    <input type="text" name="work" required class="form-control form-control-lg">
+                    <input type="text" name="work" class="form-control form-control-lg">
                 </div>
                 <div class="form-group mb-2">
                     <label>Trained As&nbsp;&nbsp;<span style="font-size: x-small;">(optional)</span></label>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <label>Church Name And Address</label>
-                    <input type="text" name="l_assembly" required class="form-control form-control-lg">
+                    <input type="text" name="l_assembly" class="form-control form-control-lg">
                 </div>
                 <div id="ajaxRes"></div>
                 <div class="d-grid mt-4">
@@ -105,6 +105,7 @@
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <script>
+    $('#register').parsley();
     $('#register').on('submit', function(event) {
         event.preventDefault();
         $.ajax({

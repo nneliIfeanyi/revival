@@ -13,7 +13,7 @@
             <p class="h5"><a href="<?= URLROOT; ?>/portal/register"><i class="bi bi-plus-circle"></i> New Registration</a></p>
             <hr>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table id="example" class="table table-hover" style="width: 100%;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -43,4 +43,10 @@
         </div>
     </div>
 </div>
-<?php require APPROOT . '/views/inc/foot.php'; ?>
+<?php require APPROOT . '/views/inc/footer.php'; ?>
+<script>
+    new DataTable('#example', {
+        ordering: false,
+        info: false,
+    });
+</script>
