@@ -41,6 +41,9 @@ class Process extends Controller
                 'param' => 'success',
                 'core' => $core
             ];
+            if (empty($data['email'])) {
+                $data['email'] = 'noEmail@' . rand(100, 900);
+            }
             if ($this->postModel->traceByEmail($data['email'])) {
                 echo "<p class='alert alert-danger fade show' role='alert'>
             <i class='bi bi-check-circle'></i>  &nbsp;Email already in use!

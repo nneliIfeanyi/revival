@@ -23,6 +23,8 @@
 <script src="<?= URLROOT; ?>/js/bootstrap.bundle.min.js"></script>
 <!-- jQuery -->
 <script src="<?= URLROOT; ?>/js/jquery.js"></script>
+<script src="<?= URLROOT; ?>/js/jquery.dataTables.mim.js"></script>
+<script src="<?= URLROOT; ?>/js/dataTables.bootstrap5.min.js"></script>
 <!-- jQuery Easing -->
 <script src="<?= URLROOT; ?>/js/jquery.easing.1.3.js"></script>
 <!-- Bootstrap -->
@@ -36,9 +38,8 @@
 <!-- Magnific Popup -->
 <script src="<?= URLROOT; ?>/js/jquery.magnific-popup.min.js"></script>
 <script src="<?= URLROOT; ?>/js/magnific-popup-options.js"></script>
-<!-- Counters ->
-		<script src="assets/js/jquery.countTo.js"></script>
-		<!-- Main -->
+<script src="<?= URLROOT; ?>/js/parsley.min.js"></script>
+<!-- Main -->
 <script src="<?= URLROOT; ?>/js/main.js"></script>
 <script>
     var button = document.getElementById('printBtn');

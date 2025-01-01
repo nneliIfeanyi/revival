@@ -37,6 +37,7 @@
                         <p id="para" style="font-size: small;text-align:center;padding-top:6px;">Pls kindly note that you are to present this document at the registration stand for authentication purposes.</p>
                         <div class="d-grid mx-4">
                             <a href="#" id="printBtn" class="btn btn-outline-secondary">Download</a>
+                            <a id="reglink" class="btn btn-secondary mt-2 text-light" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-plus-circle"></i> New Registration</a>
                         </div>
                     </div>
                 </div>

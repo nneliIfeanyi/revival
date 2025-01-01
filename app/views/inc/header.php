@@ -43,7 +43,8 @@
       .header *,
       #footer *,
       #para,
-      #printBtn {
+      #printBtn,
+      #reglink {
         display: none;
       }
 
