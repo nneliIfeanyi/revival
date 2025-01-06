@@ -2,7 +2,7 @@
 <section class="hero-section">
   <div class="flexslider px-0">
     <ul class="slides list-unstyled mt-4">
-      <?php foreach ($data['events'] as $event): ?>
+      <!-- <?php foreach ($data['events'] as $event): ?>
         <li style="background-image: url(<?= URLROOT; ?>/images/portal.jpg);">
           <div class="overlay"></div>
           <div class="container">
@@ -19,8 +19,8 @@
             </div>
           </div>
         </li>
-      <?php endforeach; ?>
-      <!-- <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
+      <?php endforeach; ?> -->
+      <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
@@ -29,13 +29,13 @@
                 <div class="slider-text-inner">
                   <h1 class="h2 fw-light"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
                   <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
-                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> --
+                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> -->
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </li> -->
+      </li>
     </ul>
   </div>
 </section>
@@ -95,8 +95,8 @@
     </section>
   <?php endif; ?>
 
-  <?php if (!empty($data['articles'])): ?>
-    <!-- <section id="articles" class="light-grey">
+  <!-- <?php if (!empty($data['articles'])): ?>
+    <section id="articles" class="light-grey">
       <div class="container">
         <div class="row animate-box">
           <div class="col-md-6 offset-md-3 text-center heading">
@@ -112,7 +112,7 @@
                 <?php endif; ?>
                 <div class="desc">
                   <h3><a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>"><?= $articles->title; ?></a></h3>
-                  <p class="text-truncate">
+                  <p class="paragraph">
                     <?= $articles->content; ?>
                   </p>
                   <a class="mb-2" href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="bi bi-arrow-right"></i></a>
@@ -122,8 +122,8 @@
           <?php endforeach; ?>
         </div>
       </div>
-    </section> -->
-  <?php endif; ?>
+    </section>
+  <?php endif; ?> -->
 
   <?php if (!empty($data['verses'])): ?>
     <section id="bible-verse">
@@ -162,6 +162,32 @@
       </div> -->
       <div class="row">
         <div class="col-md-6 offset-md-3 text-center heading">
+          <h2 class="">Recent Meeting</h2>
+        </div>
+        <?php foreach ($data['events'] as $event): ?>
+          <div class="col-md-4 animate-box">
+            <div class="events-entry">
+              <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
+              <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
+              <h3 class="fw-light"><?= $event->name; ?> | <?= $event->theme; ?></h3>
+              <p><?= $event->details; ?></p>
+              <!-- <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a> -->
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section id="events">
+    <div class="container">
+      <!-- <div class="row animate-box">
+        <div class="col-md-6 offset-md-3 text-center heading">
+          <h2 class="m-0">Upcoming Meeting</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3 text-center heading">
           <h2 class="">Upcoming Meeting</h2>
         </div>
         <?php foreach ($data['events'] as $event): ?>
@@ -177,7 +203,7 @@
         <?php endforeach; ?>
       </div>
     </div>
-  </section>
+  </section> -->
 
 
   <section id="news" class="light-grey">

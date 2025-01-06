@@ -93,6 +93,16 @@
       color: #D43F3A;
       opacity: 1;
     }
+
+    .paragraph {
+      Overflow: hidden;
+      max-height: 6rem;
+      line-height: 2.5rem;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      text-overflow: ellipsis;
+      display: block;
+    }
   </style>
 </head>
 
