@@ -52,14 +52,20 @@
 					<div class="col-md-4 animate-box">
 						<div class="articles">
 							<?php if (!empty($articles->thumbnail)): ?>
-								<a href="#" class="img-holder"><img class="img-fluid" src="<?= URLROOT . '/' . $articles->thumbnail; ?>" alt="Article image placeholder"></a>
+								<a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>" class="img-holder"><img class="img-fluid" src="<?= URLROOT . '/' . $articles->thumbnail; ?>" alt="Article image placeholder"></a>
 							<?php endif; ?>
 							<div class="desc">
-								<h3><a href="#"><?= $articles->title; ?></a></h3>
-								<p class="text-truncate">
-									<?= $articles->content; ?>
+								<h3><a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>"><?= $articles->title; ?></a></h3>
+								<div class="bg-secondary text-white p-2 mb-3">
+									<?php
+									$date = explode(' ', $articles->createdAt);
+									?>
+									<?php echo $articles->author; ?> on <?php echo $date[0]; ?>
+								</div>
+								<p>
+									<a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="icon-arrow-right3"></i></a>
 								</p>
-								<a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>">Read More <i class="icon-arrow-right3"></i></a>
+
 							</div>
 						</div>
 					</div>

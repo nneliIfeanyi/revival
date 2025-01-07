@@ -76,10 +76,10 @@
                   <td><?= $article->author; ?></td>
                   <td><?= $article->title; ?></td>
                   <td>
-                    <?= $article->content; ?>
+                    <a class="text-success me-2" href="<?= URLROOT; ?>/pages/study/<?= $article->id; ?>">View</a>
                   </td>
                   <td>
-                    <a class="text-success me-2" href="<?= URLROOT; ?>/pages/study/<?= $article->id; ?>">View</a>
+
                     <a class="text-success" href="<?= URLROOT; ?>/users/articles/edit?id=<?= $article->id; ?>">Edit</a>
                     <a class="text-danger" href="<?= URLROOT; ?>/pages/del/<?= $article->id; ?>">Trash</a>
                   </td>
