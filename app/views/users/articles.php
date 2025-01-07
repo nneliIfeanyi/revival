@@ -143,7 +143,7 @@
 <script>
   tinymce.init({
     selector: 'textarea',
-    height: 210,
+    height: 6000,
     plugins: 'charmap emoticon wordcount table pagebreak codesample',
     menubar: 'edit insert format tools',
     toolbar: 'undo redo | superscript subscript bold underline strikethrough | lineheight outdent indent | charmap',
