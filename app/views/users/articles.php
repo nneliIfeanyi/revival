@@ -71,11 +71,13 @@
             <tbody>
               <?php $n = 1;
               foreach ($data['articles'] as $article): ?>
-                <tr>
+                <tr style="overflow-y: hidden;height:200px;">
                   <th scope="row"><?= $n; ?></th>
                   <td><?= $article->author; ?></td>
                   <td><?= $article->title; ?></td>
-                  <td><?= $article->content; ?></td>
+                  <td>
+                    <?= $article->content; ?>
+                  </td>
                   <td>
                     <a class="text-success me-2" href="<?= URLROOT; ?>/pages/study/<?= $article->id; ?>">View</a>
                     <a class="text-success" href="<?= URLROOT; ?>/users/articles/edit?id=<?= $article->id; ?>">Edit</a>
@@ -143,7 +145,7 @@
 <script>
   tinymce.init({
     selector: 'textarea',
-    height: 6000,
+    height: 600,
     plugins: 'charmap emoticon wordcount table pagebreak codesample',
     menubar: 'edit insert format tools',
     toolbar: 'undo redo | superscript subscript bold underline strikethrough | lineheight outdent indent | charmap',
