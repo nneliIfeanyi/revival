@@ -2,24 +2,6 @@
 <section class="hero-section">
   <div class="flexslider px-0">
     <ul class="slides list-unstyled mt-4">
-      <!-- <?php foreach ($data['events'] as $event): ?>
-        <li style="background-image: url(<?= URLROOT; ?>/images/portal.jpg);">
-          <div class="overlay"></div>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8 offset-md-2 text-center">
-                <div class="slider-text">
-                  <div class="slider-text-inner">
-                    <h1 class="h3 fw-bold"><?= strtoupper($event->name); ?><br /> <span class="fst-italic fw-lighter" style="font-size: x-small;">Theme</span><br> <span class="fst-italic" style="color: antiquewhite;"><?= $event->theme; ?></span></h1>
-                    <h2 style="color: antiquewhite;"></h2>
-                    <a class="btn btn-success" href="<?= URLROOT; ?>/portal/register"> Register here</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      <?php endforeach; ?> -->
       <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
         <div class="overlay"></div>
         <div class="container">
@@ -66,7 +48,7 @@
 
 
   <hr class="mb-0">
-  <?php if (!empty($data['uploads'])): ?>
+  <?php if (!empty($data['uploads'])) : ?>
     <section id="sermon">
       <div class="container">
         <div class="row animate-box">
@@ -75,7 +57,7 @@
           </div>
         </div>
         <div class="row">
-          <?php foreach ($data['uploads'] as $uploads): ?>
+          <?php foreach ($data['uploads'] as $uploads) : ?>
             <div class="col-md-4 text-center animate-box mb-3">
               <div class="sermon-entry">
                 <div class="sermon" style="background-image: url(<?= URLROOT . '/' . $uploads->thumbnail; ?>);">
@@ -95,7 +77,7 @@
     </section>
   <?php endif; ?>
 
-  <!-- <?php if (!empty($data['articles'])): ?>
+  <!-- <?php if (!empty($data['articles'])) : ?>
     <section id="articles" class="light-grey">
       <div class="container">
         <div class="row animate-box">
@@ -104,10 +86,10 @@
           </div>
         </div>
         <div class="row">
-          <?php foreach ($data['articles'] as $articles): ?>
+          <?php foreach ($data['articles'] as $articles) : ?>
             <div class="col-md-4 animate-box mb-3">
               <div class="articles">
-                <?php if (!empty($articles->thumbnail)): ?>
+                <?php if (!empty($articles->thumbnail)) : ?>
                   <a href="<?= URLROOT; ?>/pages/study/<?= $articles->id; ?>" class="img-holder"><img class="img-fluid" src="<?= URLROOT . '/' . $articles->thumbnail; ?>" alt="Article image placeholder"></a>
                 <?php endif; ?>
                 <div class="desc">
@@ -125,7 +107,7 @@
     </section>
   <?php endif; ?> -->
 
-  <?php if (!empty($data['verses'])): ?>
+  <?php if (!empty($data['verses'])) : ?>
     <section id="bible-verse">
       <div class="container">
         <div class="overlay"></div>
@@ -133,7 +115,7 @@
           <div class="col-md-10 offset-md-1">
             <div class="row animate-box">
               <div class="owl-carousel owl-carousel-fullwidth">
-                <?php foreach ($data['verses'] as $verse): ?>
+                <?php foreach ($data['verses'] as $verse) : ?>
                   <div class="item">
                     <div class="bible-verse-slide active text-center">
                       <blockquote>
@@ -155,55 +137,27 @@
 
   <section id="events">
     <div class="container">
-      <!-- <div class="row animate-box">
+      <div class="row animate-box">
         <div class="col-md-6 offset-md-3 text-center heading">
           <h2 class="m-0">Upcoming Meeting</h2>
         </div>
-      </div> -->
+      </div>
       <div class="row">
-        <div class="col-md-6 offset-md-3 text-center heading">
+        <!-- <div class="col-md-6 offset-md-3 text-center heading">
           <h2 class="">Recent Meeting</h2>
-        </div>
-        <?php foreach ($data['events'] as $event): ?>
-          <div class="col-md-4 animate-box">
-            <div class="events-entry">
-              <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
-              <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
-              <h3 class="fw-light"><?= $event->name; ?> | <?= $event->theme; ?></h3>
-              <p><?= $event->details; ?></p>
-              <!-- <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a> -->
-            </div>
+        </div> -->
+        <div class="col-md-4 animate-box">
+          <div class="events-entry">
+            <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
+            <span class="date">2025-03-29 &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;2025-04-06</span>
+            <h3 class="fw-light">Ogbuoma mission outreach | Harvesting Egbuoma for Christ</h3>
+            <p>A week mission outreach</p>
+            <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
           </div>
-        <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- <section id="events">
-    <div class="container">
-      <!-- <div class="row animate-box">
-        <div class="col-md-6 offset-md-3 text-center heading">
-          <h2 class="m-0">Upcoming Meeting</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 offset-md-3 text-center heading">
-          <h2 class="">Upcoming Meeting</h2>
-        </div>
-        <?php foreach ($data['events'] as $event): ?>
-          <div class="col-md-4 animate-box">
-            <div class="events-entry">
-              <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
-              <span class="date"><?= $event->startDate; ?> &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;<?= $event->endDate; ?></span>
-              <h3 class="fw-light"><?= $event->name; ?> | <?= $event->theme; ?></h3>
-              <p><?= $event->details; ?></p>
-              <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section> -->
 
 
   <section id="news" class="light-grey">
