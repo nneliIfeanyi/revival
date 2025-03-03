@@ -9,7 +9,7 @@
             <div class="col-md-8 offset-md-2 text-center">
               <div class="slider-text">
                 <div class="slider-text-inner">
-                  <h1 class="h2 fw-light"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
+                  <h1 class="h2 fw-light pt-2"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
                   <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
                   <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p>
                 </div>
@@ -18,15 +18,15 @@
           </div>
         </div>
       </li>
-      <li style="background-image: url(<?= URLROOT; ?>/images/outreach.jpeg);">
+      <li style="background-image: url(<?= URLROOT; ?>/img/cross3.PNG);">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
             <div class="col-md-8 offset-md-2 text-center">
               <div class="slider-text">
                 <div class="slider-text-inner">
-                  <h1 class="h2 fw-light">Ogbuoma mission outreach<br /> Harvesting Egbuoma for Christ</h1>
-                  <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
+                  <h1 class="h2 fw-light pt-2">Ogbuoma mission outreach<br /> Harvesting Egbuoma for Christ</h1>
+                  <h2 style="color: antiquewhite;" class="fst-italic fw-lighter">A week mission outreach, featuring: house to house envangelism, open air preaching, ministers/workers conference.</h2>
                   <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/register"> Register now</a> </p>
                 </div>
               </div>
