@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<?php if ($data['param'] == 'success'): ?>
+<?php if ($data['param'] == 'success') : ?>
     <div class="row">
         <div class="col-lg-4 col-md-6 mx-auto">
 
@@ -10,31 +10,31 @@
                         <img src="<?php echo URLROOT; ?>/images/rev2.jpg" alt="logo img" class="mb-2" style="width:140px; height: 140px;">
                         <h5 class="fst-italic fw-bold">ONLINE REGISTRATION</h5>
                     </div>
-                    <div class="row border-bottom">
-                        <div class="col-12 py-3">
-                            <img src="<?= URLROOT; ?>/images/rev1.jpg" class="img-fluid" alt="banner image">
+                    <div class="text-center col-12 border-bottom">
+                        <div class=" py-3">
+                            <img src="<?= URLROOT; ?>/images/outreach.jpeg" style="height: 200px;width:350px" alt="banner image">
                         </div>
                         <div class="form-group mb-2">
-                            <label>Full Name</label>
-                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['title']) ?> <?= strtoupper($data['surname']); ?> <?= strtoupper($data['othernames']); ?>">
+                            <label>Full Name</label><br>
+                            <span class="fw-bold"><?= strtoupper($data['title']) ?> <?= strtoupper($data['surname']); ?> <?= strtoupper($data['othernames']); ?></span>
                         </div>
                         <div class="form-group mb-2">
-                            <label>Phone Number</label>
-                            <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['phone']) ?>">
+                            <label>Phone Number</label><br>
+                            <span class="fw-bold"><?= $data['phone'] ?></span>
                         </div>
-                        <?php if (!empty($data['email'])): ?>
+                        <?php if (!empty($data['email'])) : ?>
                             <div class="form-group mb-2">
-                                <label>Email</label>
-                                <input type="text" disabled class="form-control form-control-lg" value="<?= strtoupper($data['email']) ?>">
+                                <label>Email</label><br>
+                                <span class="fw-bold"><?= strtoupper($data['email']) ?></span>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="col-12">
-                        <p class="lead text-center py-2 m-0 fw-bold text-success text-uppercase">Your registration was successfull!</p>
-                        <p class="lead text-center m-0"><span class="fs-6">RL-Code</span> | <span class="fw-bold fst-italic"><?= $data['id2'] ?></span></p>
+                    <div class="text-center col-12">
+                        <p class="lead py-2 m-0 fw-bold text-success text-uppercase">Your registration was successfull!</p>
+                        <p class="lead m-0"><span class="fs-6">RL-Code</span> | <span class="fw-bold fst-italic"><?= $data['id2'] ?></span></p>
 
 
-                        <p id="para" style="font-size: small;text-align:center;padding-top:6px;">Pls kindly note that you are to present this document at the registration stand for authentication purposes.</p>
+                        <p id="para" style="font-size: small;padding-top:6px;">Pls kindly note that you are to present this document at the registration stand for authentication purposes.</p>
                         <div class="d-grid mx-4">
                             <a href="#" id="printBtn" class="btn btn-outline-secondary">Download</a>
                             <a id="reglink" class="btn btn-secondary mt-2 text-light" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-plus-circle"></i> New Registration</a>
@@ -45,7 +45,7 @@
         </div>
     </div>
 <?php endif; ?>
-<?php if ($data['param'] == 'rlcode'): ?>
+<?php if ($data['param'] == 'rlcode') : ?>
     <div class="mt-5"></div>
     <div class="row">
         <div class="col-lg-6 col-md-9 mx-auto">

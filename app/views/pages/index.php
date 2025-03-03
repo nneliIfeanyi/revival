@@ -11,7 +11,23 @@
                 <div class="slider-text-inner">
                   <h1 class="h2 fw-light"><?= $data['core']->h1; ?><br /> <?= $data['core']->h1b; ?></h1>
                   <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
-                  <!-- <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p> -->
+                  <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/registered/rlcode"> RL-code</a> </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li style="background-image: url(<?= URLROOT; ?>/images/outreach.jpeg);">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+              <div class="slider-text">
+                <div class="slider-text-inner">
+                  <h1 class="h2 fw-light">Ogbuoma mission outreach<br /> Harvesting Egbuoma for Christ</h1>
+                  <h2 style="color: antiquewhite;" class="fst-italic fw-lighter"><?= $data['core']->para; ?></h2>
+                  <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/register"> Register now</a> </p>
                 </div>
               </div>
             </div>
@@ -148,10 +164,10 @@
         </div> -->
         <div class="col-md-4 animate-box">
           <div class="events-entry">
-            <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/rev1.jpg" alt="banner"></a>
+            <a href="<?= URLROOT; ?>/portal/register" class="img-holder"><img class="img-fluid" src="<?= URLROOT; ?>/images/outreach.jpeg" alt="banner"></a>
             <span class="date">2025-03-29 &nbsp;<i class="bi bi-arrow-right"></i> &nbsp;2025-04-06</span>
             <h3 class="fw-light">Ogbuoma mission outreach | Harvesting Egbuoma for Christ</h3>
-            <p>A week mission outreach</p>
+            <p>A week mission outreach, featuring: house to house envangelism, open air preaching, ministers/workers conference. <strong> @ Egbuoma in Oguta LGA Imo State.</strong></p>
             <a class="btn shadow" href="<?= URLROOT; ?>/portal/register"><i class="bi bi-pen-fill"></i> Register now</a>
           </div>
         </div>
