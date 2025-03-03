@@ -25,7 +25,7 @@
             <div class="col-md-8 offset-md-2 text-center">
               <div class="slider-text">
                 <div class="slider-text-inner">
-                  <h1 class="h2 fw-light pt-2">Ogbuoma mission outreach<br /> Harvesting Egbuoma for Christ</h1>
+                  <h1 class="h2 fw-light pt-2">Ogbuoma Mission Outreach<br /> Harvesting Egbuoma for Christ</h1>
                   <h2 style="color: antiquewhite;" class="fst-italic fw-lighter">A week mission outreach, featuring: house to house envangelism, open air preaching, ministers/workers conference.</h2>
                   <p><a class="btn btn-primary" href="<?= URLROOT; ?>/portal/register"> Register now</a> </p>
                 </div>
