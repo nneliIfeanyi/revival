@@ -1,33 +1,43 @@
 <?php
 class Posts extends Controller
 {
-  private $postModel;
-  private $userModel;
+  public $userModel;
+  public $postModel;
   public function __construct()
   {
-    if (!isset($_SESSION['user_id'])) {
-      redirect('users/login');
-    }
+    // if (!isset($_SESSION['user_id'])) {
+    //   redirect('users/login');
+    // }
     // Load Models
-    $this->postModel = $this->model('Post');
+    //$this->postModel = $this->model('Post');
     $this->userModel = $this->model('User');
   }
 
+  // Load All Posts
+  // public function index()
+  // {
+  //   $posts = $this->postModel->getPosts();
 
+  //   $data = [
+  //     'posts' => $posts
+  //   ];
+
+  //   $this->view('posts/index', $data);
+  // }
 
   // Show Single Post
-  public function show($id)
-  {
-    $post = $this->postModel->getPostById($id);
-    $user = $this->userModel->getUserById($post->user_id);
+  // public function show($id)
+  // {
+  //   $post = $this->postModel->getPostById($id);
+  //   $user = $this->userModel->getUserById($post->user_id);
 
-    $data = [
-      'post' => $post,
-      'user' => $user
-    ];
+  //   $data = [
+  //     'post' => $post,
+  //     'user' => $user
+  //   ];
 
-    $this->view('posts/show', $data);
-  }
+  //   $this->view('posts/show', $data);
+  // }
 
   // Add Post
   public function add()

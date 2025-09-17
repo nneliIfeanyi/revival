@@ -1,195 +1,59 @@
 <?php
 class Pages extends Controller
 {
-  private $userModel;
+  public $audioModel;
+  public $magazineModel;
   public function __construct()
   {
-    $this->userModel = $this->model('User');
+    $this->magazineModel = $this->model('Magazine');
+    $this->audioModel = $this->model('Audios');
   }
 
-  // Load Homepage
+  // Load Homepage Redirects to welcome page
   public function index()
   {
-    // Index page redirects to welcome page
     redirect('pages/welcome');
   }
 
-
   public function welcome()
   {
-    $core = $this->userModel->getCore(1);
-    $uploads = $this->userModel->getUploads();
-    $articles = $this->userModel->getArticles();
-    $verses = $this->userModel->getVerses();
-    $events = $this->userModel->getEvents();
+    $magazines = '';
+    $audios = $this->audioModel->getAudios8();
+    //Set Data
     $data = [
-      'core' => $core,
-      'uploads' => $uploads,
-      'articles' => $articles,
-      'events' => $events,
-      'verses' => $verses
+      'magazines' => $magazines,
+      'audios' => $audios
     ];
-    // Welcome page loads index view
-    $this->view('pages/index', $data);
+
+    // Load about view
+    $this->view('pages/welcome', $data);
   }
+
   public function resources()
   {
-    $core = $this->userModel->getCore(1);
-    $uploads = $this->userModel->getUploads2();
-    $articles = $this->userModel->getArticles2();
-    $verses = $this->userModel->getVerses();
+    $magazines = '';
+    $audios = $this->audioModel->getAudios8();
+    //Set Data
     $data = [
-      'core' => $core,
-      'uploads' => $uploads,
-      'articles' => $articles,
-      'verses' => $verses
+      'magazines' => $magazines,
+      'audios' => $audios
     ];
+
+    // Load about view
     $this->view('pages/resources', $data);
   }
 
-  public function study($id)
+  public function about()
   {
-    $core = $this->userModel->getCore(1);
-    $article = $this->userModel->getArticleById($id);
+    $magazines = '';
+    $audios = $this->audioModel->getAudios();
+    //Set Data
     $data = [
-      'article' => $article,
-      'core' => $core
+      'magazines' => $magazines,
+      'audios' => $audios
     ];
 
     // Load about view
-    $this->view('pages/study', $data);
-  }
-  public function preview($id)
-  {
-    $core = $this->userModel->getCore(1);
-    $sermon = $this->userModel->getUploadById($id);
-    $recent = $this->userModel->getSermonsByCategory($id, $sermon->category);
-    $data = [
-      'sermon' => $sermon,
-      'core' => $core,
-      'recent' => $recent
-    ];
-
-    // Load about view
-    $this->view('pages/preview', $data);
-  }
-
-
-  public function contact()
-  {
-    $core = $this->userModel->getCore(1);
-    $data = [
-      'core' => $core,
-    ];
-
-    // Load about view
-    $this->view('pages/contact', $data);
-  }
-
-  public function events($params)
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $events = $this->userModel->getEvents();
-    $data = [
-      'params' => $params,
-      'events' => $events,
-      'core' => $core,
-      'name' => '',
-      'theme' => '',
-      'details' => '',
-      'startDate' => '',
-      'endDate' => ''
-    ];
-    if ($params == 'edit') {
-      $event = $this->userModel->getEventById($_GET['id']);
-      $data = [
-        'params' => $params,
-        'event'  => $event,
-        'core' => $core
-      ];
-    }
-
-    // Load about view
-    $this->view('pages/events', $data);
-  }
-
-  public function meetings()
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $core = $this->userModel->getCore(1);
-      $data = [
-        'core' => $core,
-        'name' => val_entry($_POST['name']),
-        'theme' => val_entry($_POST['theme']),
-        'details' => val_entry($_POST['details']),
-        'startDate' => val_entry($_POST['startDate']),
-        'endDate' => val_entry($_POST['endDate'])
-      ];
-      if ($this->userModel->insertIntoEvents($data)) {
-        flash('msg', 'Meeting published successfully!');
-        redirect('pages/events/publish');
-      } else {
-        die('Something went wrong!');
-      }
-    } else {
-      redirect('pages/events/publish');
-    }
-  }
-
-  public function editMeeting($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $data = [
-        'id' => $id,
-        'name' => val_entry($_POST['name']),
-        'theme' => val_entry($_POST['theme']),
-        'details' => val_entry($_POST['details']),
-        'startDate' => val_entry($_POST['startDate']),
-        'endDate' => val_entry($_POST['endDate'])
-      ];
-      if ($this->userModel->updateEvent($data)) {
-        flash('msg', 'Meeting edited successfully!');
-        redirect('pages/events/edit?id=' . $id);
-      } else {
-        die('Something went wrong!');
-      }
-    } else {
-      redirect('pages/events/publish');
-    }
-  }
-
-  // Delete Post
-  public function delete($id)
-  {
-    if ($this->userModel->deleteUpload($id)) {
-      unlink($_GET['thumbnail']);
-      flash('msg', 'Video Removed', 'alert alert-danger');
-      redirect('users/uploads/added');
-    } else {
-      die('Something went wrong');
-    }
-  }
-  public function isLoggedIn()
-  {
-    if (isset($_SESSION['user_id'])) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  public function del($id)
-  {
-    if ($this->userModel->deleteArticle($id)) {
-      unlink($_GET['thumbnail']);
-      flash('msg', 'Post Removed', 'alert alert-danger');
-      redirect('users/articles/added');
-    } else {
-      die('Something went wrong');
-    }
+    $this->view('pages/about', $data);
   }
 }

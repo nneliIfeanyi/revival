@@ -1,12 +1,11 @@
 <?php
 class Users extends Controller
 {
-  private $userModel;
-  private $postModel;
+  public $userModel;
+
   public function __construct()
   {
     $this->userModel = $this->model('User');
-    $this->postModel = $this->model('Post');
   }
 
   public function index()
@@ -14,49 +13,140 @@ class Users extends Controller
     redirect('users/login');
   }
 
-  public function login()
+  public function register()
   {
-    if (isset($_SESSION['user_id'])) {
-      redirect('users/settings/core');
+    // Check if logged in
+    if ($this->isLoggedIn()) {
+      redirect('posts');
     }
-    $core = $this->userModel->getCore(1);
-    $data = [
-      'username' => '',
-      'password' => '',
-      'username_err' => '',
-      'password_err' => '',
-      'core' => $core
-    ];
 
-    // Load View
-    $this->view('users/login', $data);
-  }
-
-  // Admin Authentication
-  public function auth()
-  {
     // Check if POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Sanitize POST
+      $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
       $data = [
-        'username' => val_entry($_POST['username']),
-        'password' => val_entry($_POST['password']),
-        'username_err' => '',
+        'name' => trim($_POST['name']),
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'confirm_password' => trim($_POST['confirm_password']),
+        'name_err' => '',
+        'email_err' => '',
         'password_err' => '',
+        'confirm_password_err' => ''
       ];
-      // Check for user
-      if ($this->userModel->findUser($data['username'])) {
-        // User Found
+
+      // Validate email
+      if (empty($data['email'])) {
+        $data['email_err'] = 'Please enter an email';
+        // Validate name
+        if (empty($data['name'])) {
+          $data['name_err'] = 'Please enter a name';
+        }
       } else {
-        // No User
-        $data['username_err'] = 'This user is not registered.';
+        // Check Email
+        if ($this->userModel->findUserByEmail($data['email'])) {
+          $data['email_err'] = 'Email is already taken.';
+        }
+      }
+
+      // Validate password
+      if (empty($data['password'])) {
+        $password_err = 'Please enter a password.';
+      } elseif (strlen($data['password']) < 6) {
+        $data['password_err'] = 'Password must have atleast 6 characters.';
+      }
+
+      // Validate confirm password
+      if (empty($data['confirm_password'])) {
+        $data['confirm_password_err'] = 'Please confirm password.';
+      } else {
+        if ($data['password'] != $data['confirm_password']) {
+          $data['confirm_password_err'] = 'Password do not match.';
+        }
       }
 
       // Make sure errors are empty
-      if (empty($data['username_err']) && empty($data['password_err'])) {
+      if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
+        // SUCCESS - Proceed to insert
+
+        // Hash Password
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        //Execute
+        if ($this->userModel->register($data)) {
+          // Redirect to login
+          flash('register_success', 'You are now registered and can log in');
+          redirect('users/login');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        // Load View
+        $this->view('users/register', $data);
+      }
+    } else {
+      // IF NOT A POST REQUEST
+
+      // Init data
+      $data = [
+        'name' => '',
+        'email' => '',
+        'password' => '',
+        'confirm_password' => '',
+        'name_err' => '',
+        'email_err' => '',
+        'password_err' => '',
+        'confirm_password_err' => ''
+      ];
+
+      // Load View
+      $this->view('users/register', $data);
+    }
+  }
+
+  public function login()
+  {
+    // Check if logged in
+    if ($this->isLoggedIn()) {
+      redirect('posts');
+    }
+
+    // Check if POST
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Sanitize POST
+      $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'email_err' => '',
+        'password_err' => '',
+      ];
+
+      // Check for email
+      if (empty($data['email'])) {
+        $data['email_err'] = 'Please enter email.';
+      }
+
+      // Check for name
+      if (empty($data['name'])) {
+        $data['name_err'] = 'Please enter name.';
+      }
+
+      // Check for user
+      if ($this->userModel->findUserByEmail($data['email'])) {
+        // User Found
+      } else {
+        // No User
+        $data['email_err'] = 'This email is not registered.';
+      }
+
+      // Make sure errors are empty
+      if (empty($data['email_err']) && empty($data['password_err'])) {
 
         // Check and set logged in user
-        $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+        $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
         if ($loggedInUser) {
           // User Authenticated!
@@ -71,410 +161,35 @@ class Users extends Controller
         $this->view('users/login', $data);
       }
     } else {
-      redirect('users/login');
+      // If NOT a POST
+
+      // Init data
+      $data = [
+        'email' => '',
+        'password' => '',
+        'email_err' => '',
+        'password_err' => '',
+      ];
+
+      // Load View
+      $this->view('users/login', $data);
     }
   }
+
   // Create Session With User Info
   public function createUserSession($user)
   {
     $_SESSION['user_id'] = $user->id;
+    $_SESSION['user_email'] = $user->email;
     $_SESSION['user_name'] = $user->name;
-    flash('msg', 'WELCOME ADMIN!');
-    redirect('users/settings/core');
+    redirect('posts');
   }
-  /*
-
-  // Views UI Prior to Form Submission //
-
-  // For Site Customization
-
-*/
-  public function settings($params)
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $data = [
-      'params' => $params,
-      'h1' => $core->h1,
-      'h1b' => $core->h1b,
-      'para' => $core->para,
-      'WWA' => $core->WWA,
-      'WWB' => $core->WWB,
-      'address' => $core->address,
-      'phone1' => $core->phone1,
-      'phone2' => $core->phone2,
-      'core' => $core
-    ];
-
-    // Load View
-    $this->view('users/settings', $data);
-  }
-
-  public function uploads($params)
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $uploads = $this->userModel->getUploads2();
-    $data = [
-      'params' => $params,
-      'link' => '',
-      'title' => '',
-      'preacher' => '',
-      'details' => '',
-      'thumbnail' => '',
-      'uploads' => $uploads,
-      'core' => $core
-    ];
-    if ($params == 'edit') {
-      $upload = $this->userModel->getUploadById($_GET['id']);
-      $data = [
-        'params' => $params,
-        'upload' => $upload,
-        'core' => $core
-      ];
-    }
-
-    // Load View
-    $this->view('users/uploads', $data);
-  }
-
-  public function articles($params)
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $articles = $this->userModel->getArticles2();
-    $data = [
-      'params' => $params,
-      'author' => '',
-      'title' => '',
-      'content' => '',
-      'thumbnail' => '',
-      'core' => $core,
-      'articles' => $articles
-    ];
-    if ($params == 'edit') {
-      $article = $this->userModel->getArticleById($_GET['id']);
-      $data = [
-        'params' => $params,
-        'article' => $article,
-      ];
-    }
-    // Load View
-    $this->view('users/articles', $data);
-  }
-
-  public function verses($params)
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $verses = $this->userModel->getVerses();
-    $verse = $this->userModel->getVerseById($_GET['id']);
-    $data = [
-      'params' => $params,
-      'verse' => $verse->verse,
-      'content' => $verse->content,
-      'core' => $core,
-      'verses' => $verses
-    ];
-
-    // Load View
-    $this->view('users/verses', $data);
-  }
-
-  public function registration()
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    $core = $this->userModel->getCore(1);
-    $users = $this->postModel->allRegistered();
-    $data = [
-      'core' => $core,
-      'users' => $users
-    ];
-
-    // Load View
-    $this->view('users/registra', $data);
-  }
-
-  /*
-
-  // Views UI Server Request Post Method //
-  // For Site Customization
-
-*/
-
-  public function coreUpdate($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-      $data = [
-        'id' => $id,
-        'h1' => val_entry($_POST['h1']),
-        'h1b' => val_entry($_POST['h1b']),
-        'para' => val_entry($_POST['para']),
-        'WWA' => $_POST['WWA'],
-        'WWB' => $_POST['WWB'],
-      ];
-      if (empty($data['h1']) || empty($data['h1b']) || empty($data['para']) || empty($data['WWA']) ||  empty($data['WWB'])) {
-        die('Something went wrong!');
-      }
-      if ($this->userModel->updateCore($data)) {
-        flash('msg', 'Changes saved successfully!');
-        redirect('users/settings/core');
-      } else {
-        die('Something went wrong!');
-      }
-    } else { // Not Post Request
-      // Redirect to settings page
-      redirect('users/settings/core');
-    }
-  }
-
-  public function more($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-      $data = [
-        'id' => $id,
-        'address' => val_entry($_POST['address']),
-        'phone1' => val_entry($_POST['phone1']),
-        'phone2' => val_entry($_POST['phone2']),
-        'WAG' => val_entry($_POST['WAG']),
-        'website' => val_entry($_POST['website']),
-        'email' => val_entry($_POST['email']),
-      ];
-      if (empty($data['address']) || empty($data['phone1']) || empty($data['phone2'])) {
-        die('Something went wrong!');
-      }
-      if ($this->userModel->updateMore($data)) {
-        flash('msg', 'Changes saved successfully!');
-        redirect('users/settings/more');
-      } else {
-        die('Something went wrong!');
-      }
-    } else { // Not Post Request
-      // Redirect to settings page
-      redirect('users/settings/more');
-    }
-  }
-
-  public function videoUpload()
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Image Processing 
-      $target_dir = "videos/";
-      $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
-      $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-      $data = [
-        'link' => val_entry($_POST['link']),
-        'title' => val_entry($_POST['title']),
-        'preacher' => val_entry($_POST['preacher']),
-        'category' => val_entry($_POST['category']),
-        'details' => val_entry($_POST['details']),
-        'thumbnail' => $target_file,
-      ];
-      if (empty($data['link']) || empty($data['title']) || empty($data['preacher']) || empty($data['details'])) {
-        $data['error'] = 'All fields are required!';
-        $this->view('users/uploads', $data);
-      }
-
-      // Check if file already exists
-      if (file_exists($target_file)) {
-        $data['error'] = 'Image file already exist!';
-        $this->view('users/uploads', $data);
-      }
-
-      // Check file size
-      if ($_FILES["thumbnail"]["size"] > 500000) {
-        $data['error'] = 'Image file is too large!';
-        $this->view('users/uploads', $data);
-      }
-
-      // Allow certain file formats
-      if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif"
-      ) {
-        $data['error'] = 'File format not supported!';
-        $this->view('users/uploads', $data);
-      }
-      if (empty($data['error'])) {
-        move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-        if ($this->userModel->insertIntoUploads($data)) {
-          flash('msg', 'Sermon is uploaded successfully!');
-          redirect('users/uploads/add');
-        } else {
-          die('Something went wrong!');
-        }
-      }
-    } else { // Not Post Request
-      // Redirect to uploads page
-      redirect('users/uploads/add');
-    }
-  }
-
-  public function articleUpload()
-  {
-    if (!$this->isLoggedIn()) {
-      redirect('users/login');
-    }
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      if (!empty($_FILES['thumbnail']['name'])) {
-        // Image Processing 
-        $target_dir = "articles/";
-        $target_file = $target_dir . basename($_FILES["thumbnail"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        $data = [
-          'author' => val_entry($_POST['author']),
-          'title' => val_entry($_POST['title']),
-          'content' => $_POST['content'],
-          'thumbnail' => $target_file,
-        ];
-        if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
-          $data['error'] = 'All fields are required!';
-          $this->view('users/articles', $data);
-        }
-
-        // Check if file already exists
-        if (file_exists($target_file)) {
-          $data['error'] = 'Image file already exist!';
-          $this->view('users/articles', $data);
-        }
-
-        // Check file size
-        if ($_FILES["thumbnail"]["size"] > 500000) {
-          $data['error'] = 'Image file is too large!';
-          $this->view('users/articles', $data);
-        }
-
-        // Allow certain file formats
-        if (
-          $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-          && $imageFileType != "gif"
-        ) {
-          $data['error'] = 'File format not supported!';
-          $this->view('users/articles', $data);
-        }
-        if (empty($data['error'])) {
-          move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $target_file);
-          if ($this->userModel->insertIntoArticles($data)) {
-            flash('msg', 'Article is saved successfully!');
-            redirect('users/articles/add');
-          } else {
-            die('Something went wrong!');
-          }
-        }
-      } else { // Thumbnail Image is empty
-        $data = [
-          'author' => val_entry($_POST['author']),
-          'title' => val_entry($_POST['title']),
-          'content' => $_POST['content'],
-          'thumbnail' => '',
-        ];
-        if (empty($data['author']) || empty($data['title']) || empty($data['content'])) {
-          $data['error'] = 'All fields are required!';
-          $this->view('users/articles', $data);
-        } else {
-          if ($this->userModel->insertIntoArticles($data)) {
-            flash('msg', 'Article is saved successfully!');
-            redirect('users/articles/add');
-          } else {
-            die('Something went wrong!');
-          }
-        }
-      }
-    } else { // Not Post Request
-      // Redirect to uploads page
-      redirect('users/articles/add');
-    }
-  }
-
-  public function uploadEdit($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $data = [
-        'id' => $id,
-        'link' => val_entry($_POST['link']),
-        'title' => val_entry($_POST['title']),
-        'preacher' => val_entry($_POST['preacher']),
-        'details' => val_entry($_POST['details']),
-        'category' => val_entry($_POST['category']),
-        'thumbnail' => '',
-      ];
-      if ($this->userModel->editUpload($data)) {
-        flash('msg', 'Changes saved successfully!');
-        redirect('users/uploads/edit?id=' . $id);
-      } else {
-        die('Something went wrong!');
-      }
-    }
-  }
-
-
-  public function articleEdit($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $data = [
-        'id' => $id,
-        'author' => val_entry($_POST['author']),
-        'title' => val_entry($_POST['title']),
-        'content' => $_POST['content'],
-        'thumbnail' => '',
-      ];
-      if ($this->userModel->editArticle($data)) {
-        flash('msg', 'Article is saved successfully!');
-        redirect('users/articles/edit?id=' . $id);
-      } else {
-        die('Something went wrong!');
-      }
-    }
-  }
-
-  public function verseUpload($id)
-  {
-    // Check if POST
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-      $data = [
-        'id' => $id,
-        'content' => val_entry($_POST['content']),
-        'verse' => val_entry($_POST['verse']),
-      ];
-      if (empty($data['content']) ||  empty($data['verse'])) {
-        $data['error'] = 'All fields are required!';
-        $this->view('users/verses', $data);
-      } else {
-        $this->userModel->updateVerses($data);
-        flash('msg', 'Verse is saved successfully!');
-        redirect('users/verses/edit?id=' . $id);
-      }
-    } else { // Not Post Request
-      // Redirect to settings page
-      redirect('users/verses/view');
-    }
-  }
-
 
   // Logout & Destroy Session
   public function logout()
   {
     unset($_SESSION['user_id']);
+    unset($_SESSION['user_email']);
     unset($_SESSION['user_name']);
     session_destroy();
     redirect('users/login');
