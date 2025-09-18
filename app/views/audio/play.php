@@ -34,7 +34,7 @@
                 <h3 class="mb-2 text-center">Sermons in this Category</h2>
                   <div class="row">
                     <?php foreach ($data['same_category'] as $audio) : ?>
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="m-2">
                           <div class="row shadow">
                             <div class="col-2 border d-flex justify-content-center align-items-center">
