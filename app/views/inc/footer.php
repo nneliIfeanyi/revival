@@ -3,7 +3,7 @@
   <div class="container footer-top">
     <div class="row gy-4">
       <div class="col-lg-5 col-md-12 footer-about">
-        <a href="index.php" class="logo d-flex align-items-center">
+        <a href="<?php echo URLROOT; ?>/pages" class="logo d-flex align-items-center">
           <span class="sitename"><img src="<?php echo URLROOT; ?>/assets/img/logo.jpg" alt="site-logo"></span>
           <span class="sitename">Revival Labourers</span>
         </a>

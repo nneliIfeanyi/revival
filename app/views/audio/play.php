@@ -3,8 +3,8 @@
 <body class="index-page">
   <?php require APPROOT . '/views/inc/navigation.php'; ?>
   <main class="main">
-    <div class="mt-5"></div>
     <!-- Hero -->
+    <div class="mt-5 d-lg-block d-none"></div>
     <section class="py-5 hero-bg">
       <div class="container py-5">
         <div class="row">
@@ -31,38 +31,39 @@
           <div class="col-lg-7 ">
             <div class="card border-0">
               <div class="card-body">
-                <h3 class="mb-2 text-center">Sermons in this Category</h2>
-                  <div class="row">
-                    <?php foreach ($data['same_category'] as $audio) : ?>
-                      <div class="col-lg-6">
-                        <div class="m-2">
-                          <div class="row shadow">
-                            <div class="col-2 border d-flex justify-content-center align-items-center">
-                              <i class="bi bi-mic text-success fs-2"></i>
-                            </div>
-                            <div class="col-10">
-                              <h6 class="p-2 m-0">
-                                <?php echo $audio->title; ?>
-                              </h6>
-                              <p class="ms-2" style="font-size:small;"> <?php echo $audio->preacher; ?></p>
-                              <div class="d-flex justify-content-around" style="font-size:smaller">
-                                <p>
-                                  <a href="<?php echo URLROOT ?>/audio/play/<?php echo $audio->id; ?>">
-                                    <i class="bi bi-play text-success"></i><span>Play</span>
-                                  </a>
-                                </p>
-                                <p>
-                                  <a href="<?php echo URLROOT . '/' . $audio->file_url ?>" download>
-                                    <i class="bi bi-download text-success" style="font-size: x-small;"></i><span>&nbsp;Download</span>
-                                  </a>
-                                </p>
-                              </div>
+                <h4 class="mb-2 text-center fst-italic">Sermons in this Category</h4>
+                <hr style="color: green;" />
+                <div class="row">
+                  <?php foreach ($data['same_category'] as $audio) : ?>
+                    <div class="col-lg-6">
+                      <div class="m-2">
+                        <div class="row shadow">
+                          <div class="col-2 border d-flex justify-content-center align-items-center">
+                            <i class="bi bi-mic text-success fs-2"></i>
+                          </div>
+                          <div class="col-10">
+                            <h6 class="p-2 m-0">
+                              <?php echo $audio->title; ?>
+                            </h6>
+                            <p class="ms-2" style="font-size:small;"> <?php echo $audio->preacher; ?></p>
+                            <div class="d-flex justify-content-around" style="font-size:smaller">
+                              <p>
+                                <a href="<?php echo URLROOT ?>/audio/play/<?php echo $audio->id; ?>">
+                                  <i class="bi bi-play text-success"></i><span>Play</span>
+                                </a>
+                              </p>
+                              <p>
+                                <a href="<?php echo URLROOT . '/' . $audio->file_url ?>" download>
+                                  <i class="bi bi-download text-success" style="font-size: x-small;"></i><span>&nbsp;Download</span>
+                                </a>
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                    <?php endforeach; ?>
-                  </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
               </div>
             </div>
           </div>
