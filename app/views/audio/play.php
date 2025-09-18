@@ -11,7 +11,7 @@
           <div class="col-lg-5 md-9">
             <div class="card shadow-sm">
               <div class="card-body bg-primary-subtle">
-                <div class="p-5 text-center">
+                <div class="py-5 text-center">
                   <audio controls>
                     <source src="<?php echo URLROOT . '/' . $data['audio']->file_url; ?>" type="">
                   </audio>

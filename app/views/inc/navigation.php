@@ -19,7 +19,7 @@
 				<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 			</nav>
 
-			<a class="btn-getstarted" href="register.php">Register</a>
+			<!-- <a class="btn-getstarted" href="register.php">Register</a> -->
 
 		</div>
 	</header>
