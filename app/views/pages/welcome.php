@@ -30,7 +30,7 @@
       <div class="text-center mt-5">
         <h3>Living In God's Amazing Grace</h3>
         <p>
-          We are open Monday to Sunday <a href="contact.php" class="more-btn"><span>Contact Us</span></a>
+          We are open Monday to Sunday <a href="<?php echo URLROOT; ?>/contact" class="more-btn"><span>Contact Us</span></a>
         </p>
       </div>
     </div><!-- No Section Ends-->

@@ -11,17 +11,15 @@ class Contacts
     // Get All Posts
     public function getMessages()
     {
-        $this->db->query("SELECT * FROM uploads WHERE category = :category ORDER BY createdAt DESC;");
-        $this->db->bind(':category', 'audio');
+        $this->db->query("SELECT * FROM contacts ORDER BY created_at DESC;");
         $results = $this->db->resultset();
-
         return $results;
     }
 
     // Get Post By ID
     public function getMessageById($id)
     {
-        $this->db->query("SELECT * FROM posts WHERE id = :id");
+        $this->db->query("SELECT * FROM contacts WHERE id = :id");
 
         $this->db->bind(':id', $id);
 

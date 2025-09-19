@@ -9,17 +9,11 @@ class Contact extends Controller
 
   public function index()
   {
-    // $audios = $this->audioModel->getAudio();
-    //Set Data
-    $data = [
-      // 'audios' => $audios
-    ];
-
-    // Load about view
+    $data = [];
     $this->view('contact/index', $data);
   }
 
-  // Add Post
+  // Send Message
   public function send_message()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
