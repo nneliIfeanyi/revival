@@ -78,15 +78,15 @@
 
           <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
             <div class="why-box">
-              <h3>Revival Outreach</h3>
-              <img src="<?php echo URLROOT; ?>/assets/img/rev4.png" class="img-fluid" alt="">
+              <h3>Upcoming Meeting</h3>
+              <img src="<?php echo URLROOT; ?>/assets/img/rev5.jpeg" class="img-fluid" alt="">
               <p style="font-size: small;">
-                <span class="mt-2">Featuring House to House Evangelism, Open air preaching, Ministers/Workers conference.</span><br />
-                <i class="bi bi-calendar-check"></i> <strong>Sat. 30th Aug.&nbsp;<i class="bi bi-arrow-right"></i>&nbsp;Sun. 7th Sept. 2025.</strong><br />
-                <i class="bi bi-geo-alt"></i> <strong>Oguta Town, Oguta LGA Imo State Nigeria</strong>
+                <span class="mt-2">Quarry Site 2026 | Theme: <i class="fw-bold">Burning for God</i> </span><br />
+                <i class="bi bi-calendar-check"></i> <strong>Sun. 4th JAN.&nbsp;<i class="bi bi-arrow-right"></i>&nbsp;Wed. 7th JAN. 2026.</strong><br />
+                <i class="bi bi-geo-alt"></i> <strong>St. John Chrysostom Seminary Osina, Ideato North.</strong>
               </p>
               <div class="text-center">
-                <a href="<?php echo URLROOT; ?>/pages/register" class="more-btn"><span>Register Now</span> <i class="bi bi-chevron-right"></i></a>
+                <a href="https://quarrysite.revivallabourers.org.ng" class="more-btn"><span>Register Now</span> <i class="bi bi-chevron-right"></i></a>
               </div>
             </div>
           </div><!-- End Why Box -->
@@ -98,10 +98,10 @@
             <div class="row gy-4">
               <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="portfolio-content h-100">
-                  <img src="<?php echo URLROOT; ?>/assets/img/outreach.jpeg" class="img-fluid" alt="">
+                  <img src="<?php echo URLROOT; ?>/assets/img/rev4.png" class="img-fluid" alt="">
                   <div class="portfolio-info pt-3">
                     <h4><a href="details.php" title="More Details">Revival Outreach</a></h4>
-                    <p>Ogbuoma mission outreach | Harvesting Egbuoma for Christ</p>
+                    <p>Featuring House to House Evangelism, Open air preaching, Ministers/Workers conference.</p>
                     <!-- <div class="text-start">
                       <a href="<?php echo URLROOT; ?>/pages/details" class="more-btn"><span>More details</span> <i class="bi bi-chevron-right"></i></a>
                     </div> -->
@@ -111,18 +111,16 @@
               </div><!-- End Icon Box -->
               <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="portfolio-content h-100">
-                  <img src="<?php echo URLROOT; ?>/assets/img/rev1.jpg" class="img-fluid" alt="">
+                  <img src="<?php echo URLROOT; ?>/assets/img/outreach.jpeg" class="img-fluid" alt="">
                   <div class="portfolio-info pt-3">
-                    <h4><a href="details.php" title="More Details">New Year Retreat</a></h4>
-                    <p>Quarry Site 2025 | Shaped And Sharpened For God's Use</p>
+                    <h4><a href="details.php" title="More Details">Revival Outreach</a></h4>
+                    <p>Ogbuoma mission outreach | Harvesting Egbuoma for Christ</p>
                     <!-- <div class="text-start">
                       <a href="<?php echo URLROOT; ?>/pages/details" class="more-btn"><span>More details</span> <i class="bi bi-chevron-right"></i></a>
                     </div> -->
                   </div>
-                </div>
-
+                </div><!-- End Icon Box -->
               </div><!-- End Icon Box -->
-
             </div>
           </div>
 
