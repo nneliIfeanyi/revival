@@ -169,16 +169,29 @@
         <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
           <div class="col-lg-3 col-md-4 portfolio-item">
             <div class="portfolio-content h-100">
+              <img src="<?php echo URLROOT; ?>/assets/img/magazineIMG/tamar.jpeg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4><a href="portfolio-details.html" title="More Details">A <span class="fst-italic"> Must Read</span> For The Youth</a>
+                </h4>
+                <p class="fst-italic" style="text-transform: uppercase;text-decoration:underline;">The Message From Tamar</p>
+                <p class="fw-bold mt-1"><a href="<?php echo URLROOT; ?>/resources/pdf/The Message from Tamar by Bro. Wisdom.pdf"><i class="bi bi-download"></i>&nbsp;&nbsp;Download</a></p>
+
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+          <div class="col-lg-3 col-md-4 portfolio-item">
+            <div class="portfolio-content h-100">
               <img src="<?php echo URLROOT; ?>/assets/img/magazineIMG/img2.png" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4><a href="portfolio-details.html" title="More Details">The <span class="fst-italic"> Pilgrim's</span> Guide Post</a>
                 </h4>
                 <p class="fst-italic" style="text-transform: uppercase;text-decoration:underline;">Fit for the kingdom service</p>
-                <!-- <p class="fw-light"><i class="bi bi-pencil"></i>&nbsp;&nbsp;Wisdom Eze</p> -->
+                <p class="fw-bold mt-1"><a href="<?php echo URLROOT; ?>/resources/pdf/The Pilgrm Compass 3rd edition.pdf"><i class="bi bi-download"></i>&nbsp;&nbsp;Download</a></p>
 
               </div>
             </div>
           </div><!-- End Portfolio Item -->
+
           <div class="col-lg-3 col-md-4 portfolio-item">
             <div class="portfolio-content h-100">
               <img src="<?php echo URLROOT; ?>/assets/img/magazineIMG/img1.png" class="img-fluid" alt="">
@@ -186,7 +199,7 @@
                 <h4><a href="portfolio-details.html" title="More Details">The <span class="fst-italic"> Pilgrim's</span> Guide Post</a>
                 </h4>
                 <p class="fst-italic" style="text-transform: uppercase;text-decoration:underline;">Fit for the kingdom service 2</p>
-                <!-- <p class="fw-light"><i class="bi bi-pencil"></i>&nbsp;&nbsp;Wisdom Eze</p> -->
+                <p class="fw-bold mt-1"><a href="<?php echo URLROOT; ?>/resources/pdf/The Pilgrm Compass 4th edition.pdf"><i class="bi bi-download"></i>&nbsp;&nbsp;Download</a></p>
 
               </div>
             </div>
