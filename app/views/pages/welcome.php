@@ -78,16 +78,19 @@
 
           <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
             <div class="why-box">
-              <h3>Upcoming Meeting</h3>
-              <img src="<?php echo URLROOT; ?>/assets/img/pic.jpeg" class="img-fluid" alt="">
-              <p style="font-size: small;">
+              <h3>Recent Meeting</h3>
+              <img src="<?php echo URLROOT; ?>/assets/img/rev6.jpg" class="img-fluid" alt="">
+              <!-- <p style="font-size: small;">
                 <span class="mt-2">Christian Couples Retreat (CCR) | Theme: <i class="fw-bold">Building The Marital Altar</i> </span><br />
                 <i class="bi bi-calendar-check"></i> <strong>Fri. 6th &nbsp;<i class="bi bi-arrow-right"></i>&nbsp;Sat. 7th March. 2026.</strong><br />
                 <i class="bi bi-geo-alt"></i> <strong>Throne Room Trust Ministry #15 Agbatani Rd. Opp Cathedral of St Mary Magdalene, Oguta, Imo State.</strong>
-              </p>
-              <div class="text-center">
+              </p> -->
+              <!-- <div class="text-center pt-2 mt-1">
                 <a href="https://quarrysite.revivallabourers.org.ng" class="more-btn"><span>Register Now</span> <i class="bi bi-chevron-right"></i></a>
-              </div>
+              </div> -->
+              <!-- <div class="text-center pt-2 mt-1">
+                <a href="http://localhost/quary_site" class="more-btn"><span>Register Now</span> <i class="bi bi-chevron-right"></i></a>
+              </div> -->
             </div>
           </div><!-- End Why Box -->
 
